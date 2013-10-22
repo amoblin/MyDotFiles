@@ -1,0 +1,16 @@
+set completion-ignore-case off
+set editing-mode vi
+Control-l: clear-screen
+Control-n: next-history
+Control-p: previous-history
+Control-e: end-of-line
+Control-a: beginning-of-line
+Control-b: backward-char
+Control-d: delete-char
+Control-f: forward-char
+Control-k: kill-line
+
+#set keymap vi-insert
+#set keymap emacs-ctlx
+#v: vi-editing-mode
+#Control-v: "\C-xv\e"

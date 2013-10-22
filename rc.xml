@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_config xmlns="http://openbox.org/">
+    <applications>
+        <application class="*">
+            <decor>no</decor>
+            <maximized>yes</maximized>
+        </application>
+        <application name="google-chrome">
+            <desktop>1</desktop>
+        </application>
+        <application name="gnome-terminal">
+            <desktop>2</desktop>
+        </application>
+    </applications>
+    <desktops>
+        <number>6</number>
+        <firstdesk>2</firstdesk>
+        <names>
+            <name>Google Chrome</name>
+            <name>Terminal</name>
+            <name>Alpha</name>
+        </names>
+    </desktops>
+    <keyboard>
+        <chainQuitKey>W-q</chainQuitKey>
+        <keybind key="W-comma">
+            <action name="DesktopPrevious">
+                <dialog>no</dialog>
+            </action>
+        </keybind>
+        <keybind key="W-period">
+            <action name="DesktopNext">
+                <dialog>no</dialog>
+            </action>
+        </keybind>
+        <keybind key="W-t">
+            <action name="Execute">
+                <command>gnome-terminal</command>
+            </action>
+        </keybind>
+        <keybind key="W-b">
+            <action name="Execute">
+                <command>google-chrome</command>
+            </action>
+        </keybind>
+        <keybind key="W-o">
+            <action name="Execute">
+                <command>gmrun</command>
+            </action>
+        </keybind>
+        <keybind key="W-j">
+            <action name="PreviousWindow"/>
+        </keybind>
+        <keybind key="W-k">
+            <action name="NextWindow"/>
+        </keybind>
+        <keybind key="A-Tab">
+            <action name="NextWindow"/>
+        </keybind>
+        <keybind key="W-Tab">
+            <action name="NextWindow"/>
+        </keybind>
+    </keyboard>
+</openbox_config>

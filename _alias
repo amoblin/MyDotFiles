@@ -1,0 +1,22 @@
+alias .='source'
+alias ls='ls -G'
+alias ll='ls -lh'
+alias la='ls -A'
+alias diff='colordiff -u'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias g='git'
+
+alias grep='grep --color'
+alias cgrep='grep --color=always'
+
+# use alias under sudo
+alias sudo='sudo '
+
+# light green in keywords.
+#export GREP_COLOR='00;38;5;157'
+#export GREP_COLORS='ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36'
+#
+
+alias screen='export SCREENPWD=$(pwd);screen'

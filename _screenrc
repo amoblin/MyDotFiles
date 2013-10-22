@@ -1,0 +1,52 @@
+# 启动时不显示欢迎屏幕
+startup_message off
+
+#综合考虑mac平台使用，选择此键
+escape ^\\
+
+#
+# 屏幕缓冲区
+defscrollback 1024
+#
+# 在vi或less之类退出时完全恢复到原屏幕内容
+altscreen on
+#
+# #显示屏幕下方状态栏
+#hardstatus alwayslastline
+#
+# #状态栏的显示信息定制 ( 具体符号代表什么请 man screen )
+#hardstatus string "%{= kG[%{G%H%{g][%= %{= kw%?%-Lw%?%{r(%{W%n*%f%t%?(%u)%?%{r)%{w%?%+Lw%?%?%= %{g][%{B%Y-%m-%d%{W%c:%s%{g]"
+#hardstatus string "%{.kB%-w%{..M%n %t%{-%+w %=%{..B%H(%l) %{..B%Y/%m/%d %c:%s "
+#hardstatus string "%{.bW%-w%{.rY%n %t%{-%+w %=%{..G%H(%l) %{..Y%Y/%m/%d %c:%s "
+
+#hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%m-%d %D %{G}%c%{R}]"  
+
+#defhstatus "screen ^E (^Et) | $USER@^EH"
+hardstatus off
+caption always "%{= kw}%-Lw%{= BW}%n %t%{-}%+w %-= @%H %Y-%m-%d %C"
+
+# #绑定 Ctrl+a-w 为查看所有窗口列表
+bind w windowlist -b
+
+bind "^," prev
+
+# mac下手势查看屏幕历史
+termcapinfo xterm* ti@:te@
+
+# 使用zsh, may be lost the pwd and the settings below.
+#shell -zsh
+#shell -bash
+
+## init window list
+chdir "/Users/amoblin"
+screen -t '~'
+
+chdir "/Users/amoblin/Dropbox/Apps/Marboo"
+screen -t 'marboo'
+
+chdir "/Users/amoblin/proj/iOS/mofunshow"
+screen -t 'mofunshow'
+screen -t 'mofunshow'
+
+# default directory
+chdir "/Users/amoblin/Dropbox/Apps/Marboo"
