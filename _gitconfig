@@ -1,0 +1,33 @@
+[user]
+    name = amoblin@mpb
+    email = amoblin@gmail.com
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+    diffc = diff --cached
+    cdiff = diff --color-words
+    desc = describe
+    glog = log --graph
+    plog = log -p
+    nlog = log --name-status
+    dlog = log --decorate
+[color]
+	ui = auto
+[core]
+	editor = vim
+	ignore = pyc
+	excludesfile = /etc/gitignore
+	quotepath = false
+[push]
+    default = upstream
+[merge]
+    tool = extMerge
+[mergetool "extMerge"]
+    cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+    trustExitCode = false
+#[http]
+#	sslVerify = false
+#[https]
+#	proxy = 127.0.0.1:8087
