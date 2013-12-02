@@ -13,14 +13,17 @@
 (setq linum-format "%d ")
 
 ;; 字体和编码
-(set-language-environment 'UTF-8)
-(set-locale-environment "UTF-8")
-
-(set-face-attribute 'default nil :height 160)
-;(set-fontset-font 'default (font-spec :name "Hei"))
-;(set-fontset-font "fontset-global" 'chinese-gb2312 '("Hei" . "gb2312.1980-0"))
+;; 设置英文字体
+(if (display-graphic-p)
+(set-face-attribute 'default nil :font "Menlo 16" :height 160))
+(if (display-graphic-p)
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+       charset (font-spec :family "Heiti_SC" :size 16))))
 
 ;; UTF-8 settings
+(set-language-environment 'UTF-8)
+(set-locale-environment "UTF-8")
 (set-language-environment "UTF-8")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -28,12 +31,14 @@
 (set-buffer-file-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (modify-coding-system-alist 'process "*" 'utf-8)
-
 (setq default-process-coding-system
       '(chinese-gbk . chinese-gbk))
 (setq-default pathname-coding-system 'chinese-gbk)
 
-;; font
-(set-frame-font "Courier New-16") ;; for Mac
-
-;; 主题配色
+;; markdown syntax height
+(add-to-list 'load-path "~/.emacs.d/modes")
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
