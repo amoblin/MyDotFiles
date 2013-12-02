@@ -16,7 +16,7 @@
 [color]
 	ui = auto
 [core]
-	editor = vim
+	editor = emacs
 	ignore = pyc
 	excludesfile = /etc/gitignore
 	quotepath = false
