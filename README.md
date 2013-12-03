@@ -1,12 +1,12 @@
 # Amoblin的配置文件
 
-
 OS: Mac
-
 
 ## 会不定期更新的
 
+* Emacs
 * Vim
+* Alias
 * Screen
 * Zsh
 * Git
