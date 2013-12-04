@@ -1,0 +1,24 @@
+* Amoblin的配置文件
+
+** Environment
+
+- OS: OS X Mavericks
+- SHELL: zsh
+- VCS: Git
+- Editor: Emacs
+
+** 会不定期更新的
+
+- Emacs
+- Vim
+- Alias
+- Screen
+- Zsh
+- Git
+- Readline
+- Bash
+
+** 包含但不会更新的（留作纪念）
+
+- Openbox
+- Fcitx

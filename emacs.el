@@ -18,6 +18,10 @@
 (set-face-background 'hl-line "#3e4446")
 (set-face-foreground 'highlight nil)
 
+;; iimage mode
+(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
+(autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
+
 ;; 设置备份目录
 ;; Put autosave files (ie #foo#) in one place, *not*
 ;; scattered all over the file system!
