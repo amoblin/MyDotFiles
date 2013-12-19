@@ -4,23 +4,60 @@
 (tool-bar-mode -1)
 ;; 禁用滚动条
 (scroll-bar-mode -1)
+
 ;; 背景颜色
 (set-background-color "black")
 (set-foreground-color "white")
+;; 当前行高亮
+(global-hl-line-mode 1)
+;(set-face-background 'hl-line "#efefef")
+(set-face-background 'hl-line "#141414")
+(set-face-foreground 'highlight nil)
+
 ;; 自动恢复
-(desktop-save-mode 1)
+;;(desktop-save-mode 1)
 
 ;; 显示行号
 (global-linum-mode 1)
 (setq linum-format "%d ")
-;; 当前行高亮
-(global-hl-line-mode 1)
-(set-face-background 'hl-line "#3e4446")
-(set-face-foreground 'highlight nil)
+;; 添加文件更新时间戳
+(add-hook 'before-save-hook 'time-stamp)
+
+;; Org-Mode
+(setq org-hide-leading-stars t)
+(setq org-log-done 'time)
+(define-key global-map "\C-ca" 'org-agenda)
+;; Org Export HTML
+(setq org-publish-project-alist
+      '(("blog" .  (:base-directory "~/blog/source/org_posts/"
+				    :base-extension "org"
+				    :publishing-directory "~/blog/source/_posts/"
+				    :sub-superscript ""
+				    :recursive t
+				    :publishing-function org-publish-org-to-html
+				    :headline-levels 4
+				    :html-extension "html"
+				    :body-only t))))
+
+;; Jade Mode
+(add-to-list 'load-path "~/.emacs.d/vendor/jade-mode")
+(require 'sws-mode)
+(require 'jade-mode)    
+(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; Adaptive Filling
+(setq adaptive-fill-regexp "[ \t]+\\|[ \t]*\\([0-9]+\\.\\|\\*+\\)[ \t]*")
+
+;; 语法高亮
+;(add-auto-mode 'ruby-mode "Podfile\\'" "\\.podspec\\'")
+(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode)) ;; support Podfiles
+(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
 ;; iimage mode
-(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
-(autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
+;(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
+;(autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
 
 ;; 设置备份目录
 ;; Put autosave files (ie #foo#) in one place, *not*
@@ -82,18 +119,8 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; evil
-(add-to-list 'load-path "~/.emacs.d/evil")
-(require 'evil)
-(evil-mode 1)
-
-(setq evil-default-state 'emacs)
-;这个是打开文件后默认进入emacs模式
-;我还要在emacs和vim模式里面切换：C-z，换来换去啊
-
-(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
-; C-o按键调用vim功能（就是临时进入normal模式，然后自动回来）
-; 比如，你要到第一行，可以使用emacs的 M-<，也可以使用evil的C-o gg
-; 其中C-o是进入vim模式 gg是去第一行，命令之后自动还原emacs模式！
-; "Fuck you!" 如何删除""里面的内容呢？Emacs的话，默认文本对象能力不强
-; 有了evil的拓展 C-o di" 轻轻松松搞定~
-; 比如C-o 3dd C-o dib C-o yy C-o p C-o f * 舒服啊~发挥想象力吧
+;(add-to-list 'load-path "~/.emacs.d/evil")
+;(require 'evil)
+;(evil-mode 1)
+;(setq evil-default-state 'emacs)
+;(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
