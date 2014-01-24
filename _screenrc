@@ -2,7 +2,7 @@
 startup_message off
 
 #综合考虑mac平台使用，选择此键
-escape ^\\
+escape ^]]
 
 #
 # 屏幕缓冲区
@@ -38,15 +38,15 @@ termcapinfo xterm* ti@:te@
 #shell -bash
 
 ## init window list
-chdir "/Users/amoblin"
-screen -t '~'
+#chdir "/Users/amoblin"
+#screen -t '~'
 
-chdir "/Users/amoblin/Dropbox/Apps/Marboo"
-screen -t 'marboo'
+#chdir "/Users/amoblin/Dropbox/Apps/Marboo"
+#screen -t 'marboo'
 
-chdir "/Users/amoblin/proj/iOS/mofunshow"
-screen -t 'mofunshow'
-screen -t 'mofunshow'
+#chdir "/Users/amoblin/proj/iOS/mofunshow"
+#screen -t 'mofunshow'
+#screen -t 'mofunshow'
 
 # default directory
-chdir "/Users/amoblin/Dropbox/Apps/Marboo"
+#chdir "/Users/amoblin/Dropbox/Apps/Marboo"
