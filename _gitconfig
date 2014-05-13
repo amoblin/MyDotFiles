@@ -2,24 +2,26 @@
     name = amoblin@mpb
     email = amoblin@gmail.com
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    au = add -u
     diffc = diff --cached
     cdiff = diff --color-words
     desc = describe
-    glog = log --graph
-    plog = log -p
-    nlog = log --name-status
-    dlog = log --decorate
+    lo = log --pretty=oneline
+    lg = log --graph
+    lp = log -p
+    ln = log --name-status
+    ld = log --decorate
 [color]
-	ui = auto
+    ui = auto
 [core]
-	editor = emacs
-	ignore = pyc
-	excludesfile = /etc/gitignore
-	quotepath = false
+    editor = emacs
+    ignore = pyc
+    excludesfile = /etc/gitignore
+    quotepath = false
 [push]
     default = upstream
 [merge]
@@ -28,6 +30,6 @@
     cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
     trustExitCode = false
 #[http]
-#	sslVerify = false
+#    sslVerify = false
 #[https]
-#	proxy = 127.0.0.1:8087
+#    proxy = 127.0.0.1:8087

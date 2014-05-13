@@ -11,8 +11,10 @@
 ;; 当前行高亮
 (global-hl-line-mode 1)
 ;(set-face-background 'hl-line "#efefef")
-(set-face-background 'hl-line "#141414")
+(set-face-background 'hl-line "#666666")
 (set-face-foreground 'highlight nil)
+;; 在同一窗口打开文件
+(setq ns-pop-up-frames nil)
 
 ;; 自动恢复
 ;;(desktop-save-mode 1)
@@ -23,28 +25,48 @@
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
 
+;; 设置elpa源
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
+
 ;; Org-Mode
 (setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 (define-key global-map "\C-ca" 'org-agenda)
-;; Org Export HTML
-(setq org-publish-project-alist
-      '(("blog" .  (:base-directory "~/blog/source/org_posts/"
-				    :base-extension "org"
-				    :publishing-directory "~/blog/source/_posts/"
-				    :sub-superscript ""
-				    :recursive t
-				    :publishing-function org-publish-org-to-html
-				    :headline-levels 4
-				    :html-extension "html"
-				    :body-only t))))
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+;; org中源码高亮显示
+(setq org-src-fontify-natively t)
+;; 导出html时源码高亮显示
+(require 'htmlize)
+
+
+;; Common Lisp
+; slime setup
+(setq inferior-lisp-program "sbcl")
+(require 'slime)
+(slime-setup)
+
+;; Markdown Mode
+(add-to-list 'load-path "~/.emacs.d/modes")
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;; Projectile
+(require 'projectile)
+(projectile-global-mode)
 
 ;; Jade Mode
 (add-to-list 'load-path "~/.emacs.d/vendor/jade-mode")
-;;(require 'sws-mode)
-;;(require 'jade-mode)
-;;(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
-;;(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+(require 'sws-mode)
+(require 'jade-mode)
+(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
 ;; Adaptive Filling
 (setq adaptive-fill-regexp "[ \t]+\\|[ \t]*\\([0-9]+\\.\\|\\*+\\)[ \t]*")
@@ -101,22 +123,6 @@
 (setq default-process-coding-system
       '(chinese-gbk . chinese-gbk))
 (setq-default pathname-coding-system 'chinese-gbk)
-
-;; 设置elpa源
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-;; 在同一窗口打开文件
-(setq ns-pop-up-frames nil)
-
-;; markdown syntax height
-(add-to-list 'load-path "~/.emacs.d/modes")
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; evil
 ;(add-to-list 'load-path "~/.emacs.d/evil")
