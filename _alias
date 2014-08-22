@@ -1,5 +1,6 @@
 alias .='source'
 alias ls='ls --color'
+#alias ls='ls -G'
 alias ll='ls -lh'
 alias la='ls -A'
 alias diff='colordiff -u'

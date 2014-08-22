@@ -25,19 +25,36 @@ setopt correctall
 #prompt adam1
 #
 # Solution 3: custom prompt.
-PROMPT='%K{blue}[%n@%m %.]%#%k '
+#PROMPT='%K{blue}[%n@%m %.]%#%k '
+PROMPT='%F{green}[%n@%m %.]%#%f '
+
 #RPROMPT='%F{cyan}%8~%f'
 
-# vim风格快捷键
-bindkey -v
+#命令提示符
+#RPROMPT=$(echo "$RED%D %T$FINISH")
+#PROMPT=$(echo "$CYAN%n@$YELLOW%m:$GREEN%~$_YELLOW%%$FINISH ")
+ 
+#PROMPT=$(echo "$BLUE%M$GREEN%/
+#$CYAN%n@$BLUE%M:$GREEN%/$_YELLOW>>>$FINISH ")
+#标题栏、任务栏样式{{{
+#case $TERM in (*xterm*|*rxvt*|(dt|k|E)term)
+#precmd () { print -Pn "\e]0;\a" }
+#preexec () { print -Pn "\e]0;\ $1\a" }
+#;;
+#esac
+#}}}
 
-bindkey "^P" up-line-or-history
-bindkey "^N" down-line-or-history
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^B" backward-char
-bindkey "^F" forward-char
-bindkey "^D" delete-char
+
+# vim风格快捷键
+#bindkey -v
+
+#bindkey "^P" up-line-or-history
+#bindkey "^N" down-line-or-history
+#bindkey "^A" beginning-of-line
+#bindkey "^E" end-of-line
+#bindkey "^B" backward-char
+#bindkey "^F" forward-char
+#bindkey "^D" delete-char
 #bindkey "^\\\e" copy-mode
 #
 source ~/.alias
@@ -46,6 +63,7 @@ source ~/.alias
 # global config
 #################
 #
+export GOPATH=~/.go
 export LC_ALL=
 export LANG="en_US.UTF-8"
 export LC_CTYPE="zh_CN.UTF-8"
@@ -117,22 +135,8 @@ done
 FINISH="%{$terminfo[sgr0]%}"
 #}}}
  
-#命令提示符
-#RPROMPT=$(echo "$RED%D %T$FINISH")
-PROMPT=$(echo "$CYAN%n@$YELLOW%m:$GREEN%~$_YELLOW%%$FINISH ")
- 
-#PROMPT=$(echo "$BLUE%M$GREEN%/
-#$CYAN%n@$BLUE%M:$GREEN%/$_YELLOW>>>$FINISH ")
-#标题栏、任务栏样式{{{
-#case $TERM in (*xterm*|*rxvt*|(dt|k|E)term)
-#precmd () { print -Pn "\e]0;\a" }
-#preexec () { print -Pn "\e]0;\ $1\a" }
-#;;
-#esac
-#}}}
- 
 #编辑器
-export EDITOR=vim
+export EDITOR=emacs
 #关于历史纪录的配置 {{{
 #历史纪录条目数量
 export HISTSIZE=10000
