@@ -134,6 +134,9 @@ eval $color='%{$fg[${(L)color}]%}'
 done
 FINISH="%{$terminfo[sgr0]%}"
 #}}}
+
+
+# 从这里开始某些内容会导致screenrc中设置多个tab时路径无效 :(
  
 #编辑器
 export EDITOR=emacs
