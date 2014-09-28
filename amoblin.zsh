@@ -5,7 +5,7 @@
 #
 ZSH_THEME="amoblin"
 export EDITOR=emacs
-plugins=(git, tmux)
+plugins=(osx terminalapp git tmux)
 
 #tmux_init()
 #{

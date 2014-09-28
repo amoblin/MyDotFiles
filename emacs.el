@@ -4,6 +4,26 @@
 (tool-bar-mode -1)
 ;; 禁用滚动条
 (scroll-bar-mode -1)
+;; kill buffer without confirm
+(global-set-key [(control x) (k)] 'kill-this-buffer)
+;; 设置第三方插件安装目录
+(add-to-list 'load-path "~/.emacs.d/vendor")
+
+;; 启动时全屏
+(defun fullscreen (&optional f)
+  (interactive)
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
+
+;;(require 'maxframe)
+;;(add-hook 'window-setup-hook 'maximize-frame t)
+
+;;(require 'color-theme)
+;;(color-theme-initialize)
+;; dark
+;;(color-theme-tty-dark)
 
 ;; 背景颜色
 (set-background-color "black")
@@ -16,6 +36,12 @@
 ;; 在同一窗口打开文件
 (setq ns-pop-up-frames nil)
 
+;; 语法高亮
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
+(add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("\\.*tmux$" . conf-unix-mode))
+
 ;; 自动恢复
 ;;(desktop-save-mode 1)
 
@@ -25,11 +51,41 @@
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
 
+;; Emacs Shell Mode
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
+
+;; multi-term.el
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+;(setq multi-term-program "/bin/zsh")
+(global-set-key (kbd "C-c z") (quote multi-term))
+
+
+(defun nolinum ()
+  (global-linum-mode 0)
+)
+;;(add-hook 'shell-mode-hook 'nolinum)
+
 ;; 设置elpa源
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
+;; auto update package list
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+;; 80 column indicator
+(require 'fill-column-indicator)
+(setq fci-rule-width 1)
+(setq fci-rule-color "gray")
+;(add-hook 'after-change-major-mode-hook 'fci-mode)
+(setq-default fci-rule-column 80)
+(setq fci-handle-truncate-lines nil)
+
+;; zsh
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 ;; Org-Mode
 (setq org-hide-leading-stars t)
@@ -42,12 +98,21 @@
 ;; 导出html时源码高亮显示
 (require 'htmlize)
 
+;; Golang
+(require 'go-mode)
 
 ;; Common Lisp
 ; slime setup
 (setq inferior-lisp-program "sbcl")
 (require 'slime)
 (slime-setup)
+
+;; Presentation/ Slide
+;; retrieve at https://github.com/yjwen/org-reveal/
+(require 'ox-reveal)
+
+;; Swift Mode
+(require 'swift-mode) 
 
 ;; Markdown Mode
 (add-to-list 'load-path "~/.emacs.d/modes")
@@ -56,6 +121,7 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.apib\\'" . markdown-mode))
 
 ;; Projectile
 (require 'projectile)
