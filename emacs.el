@@ -2,6 +2,8 @@
 (setq inhibit-startup-screen t)
 ;; 隐藏工具栏
 (tool-bar-mode -1)
+;; 禁用menubar
+(menu-bar-mode -1)
 ;; 禁用滚动条
 (scroll-bar-mode -1)
 ;; kill buffer without confirm
@@ -31,7 +33,7 @@
 ;; 当前行高亮
 (global-hl-line-mode 1)
 ;(set-face-background 'hl-line "#efefef")
-(set-face-background 'hl-line "#666666")
+(set-face-background 'hl-line "#333333")
 (set-face-foreground 'highlight nil)
 ;; 在同一窗口打开文件
 (setq ns-pop-up-frames nil)
@@ -55,13 +57,6 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 
-;; multi-term.el
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
-;(setq multi-term-program "/bin/zsh")
-(global-set-key (kbd "C-c z") (quote multi-term))
-
-
 (defun nolinum ()
   (global-linum-mode 0)
 )
@@ -75,6 +70,24 @@
 ;; auto update package list
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; multi-term.el
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+;(setq multi-term-program "/bin/zsh")
+(global-set-key (kbd "C-c z") (quote multi-term))
+
+
+;; tabbar mode
+(require 'tabbar)
+(tabbar-mode t)
+;; 禁用分组
+(setq tabbar-buffer-groups-function nil)
+
+(global-set-key [(meta n)] 'tabbar-forward)
+(global-set-key [(meta p)] 'tabbar-backward)
 
 ;; 80 column indicator
 (require 'fill-column-indicator)
