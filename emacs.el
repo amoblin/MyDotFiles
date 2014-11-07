@@ -53,6 +53,18 @@
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
 
+(defun insert-date (prefix)
+  "Insert the current date. With prefix-argument, use ISO format. With
+   two prefix arguments, write out the day and month name."
+  (interactive "P")
+  (let ((format (cond
+		 ((not prefix) "%d.%m.%Y")
+		 ((equal prefix '(4)) "%Y-%m-%d %H:%M:%S")
+		 ((equal prefix '(16)) "%A, %d. %B %Y")))
+	(system-time-locale "zh_CN"))
+    (insert (format-time-string format))))
+(global-set-key (kbd "C-c d") 'insert-date)
+
 ;; Emacs Shell Mode
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
@@ -61,6 +73,23 @@
   (global-linum-mode 0)
 )
 ;;(add-hook 'shell-mode-hook 'nolinum)
+
+;;开启dot画图
+(defvar org-list-allow-alphabetical t)
+(defun  org-element-bold-successor           (arg))
+(defun  org-element-code-successor           (arg))
+(defun  org-element-entity-successor         (arg))
+(defun  org-element-italic-successor         (arg))
+(defun  org-element-latex-fragment-successor (arg))
+(defun  org-element-strike-through-successor (arg))
+(defun  org-element-subscript-successor      (arg))
+(defun  org-element-superscript-successor    (arg))
+(defun  org-element-underline-successor      (arg))
+(defun  org-element-verbatim-successor       (arg))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)))
 
 ;; 设置elpa源
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -72,6 +101,10 @@
   (package-refresh-contents))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; dockerfile-mode
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 ;; multi-term.el
 (require 'multi-term)
@@ -101,6 +134,7 @@
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 ;; Org-Mode
+(require 'ox-gfm)
 (setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -110,6 +144,9 @@
 (setq org-src-fontify-natively t)
 ;; 导出html时源码高亮显示
 (require 'htmlize)
+;; 导出markdown
+(eval-after-load "org"
+  '(require 'ox-md nil t))
 
 ;; Golang
 (require 'go-mode)
