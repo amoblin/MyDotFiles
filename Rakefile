@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # author: amoblin <amoblin@gmail.com>
 # file name: Rakefile
-# create date: 2014-10-21
+# create date: <2014-10-21>
 # This file is created from $MARBOO_HOME/media/starts/Rakefile
 # 本文件由 $MARBOO_HOME/media/starts/Rakefile 复制而来
 
@@ -39,12 +39,13 @@ end
 ###################
 #  for OS X App
 ###################
+
 task :xcode do |t|
-  sh "xcodebuild -workspace #{$name}.xcworkspace -scheme #{$name} -configuration Release -sdk macosx10.10 -derivedDataPath . clean"
-  sh "xcodebuild -workspace #{$name}.xcworkspace -scheme #{$name} -configuration Release -sdk macosx10.10 -derivedDataPath ."
+  sh "xctool -workspace #{$name}.xcworkspace -scheme #{$name} -configuration Release -sdk macosx10.10 -resultBundlePath=Build clean"
+  sh "xctool -workspace #{$name}.xcworkspace -scheme #{$name} -configuration Release -sdk macosx10.10 -resultBundlePath=Build build"
   File.directory?"/tmp/#{$name}" or `mkdir /tmp/#{$name}`
   sh "rm -rf /tmp/#{$name}/#{$name}.app"
-  sh "cp -rf Build/Products/Release/#{$name}.app /tmp/#{$name}/#{$name}.app"
+  sh "cp -rf Build/#{$name}.app /tmp/#{$name}/#{$name}.app"
 end
 
 task :dmg => :xcode do |t|
@@ -61,3 +62,51 @@ task :install => :xcode do |t|
   sh "sudo cp -rf /tmp/#{$name}/#{$name}.app /Applications"
 end
 
+########################################################
+#
+# for iOS App
+#
+# see    https://github.com/amoblin/simplehttpsserver
+#
+########################################################
+
+
+
+
+
+########################
+# for static Libraries
+########################
+
+
+task :lib do |t|
+  sh "xctool -project UMFeedback.xcodeproj -scheme Feedback -configuration Release -sdk iphonesimulator8.1 build CONFIGURATION_BUILD_DIR=build"
+  sh "mv build/libUMFeedback.a build/libUMFeedback_intel.a"
+  sh "xctool -project UMFeedback.xcodeproj -scheme Feedback -configuration Release -sdk iphoneos8.1 build CONFIGURATION_BUILD_DIR=Build"
+  sh "mv build/libUMFeedback.a build/libUMFeedback_arm.a"
+
+  sh "lipo -create build/libUMFeedback_intel.a build/libUMFeedback_arm.a -output build/libUMFeedback.a"
+  sh "lipo -info Build/libUMFeedback.a"
+end
+
+task :showSettings do |t|
+  xctool -project UMFeedback.xcodeproj -scheme Feedback -showBuildSettings
+end
+
+task :libInstall do |t|
+cp build/libUMFeedback.a ../FeedbackDemo/UMengFeedback_SDK_2.0
+cp UMFeedback/UMFeedback.h ../FeedbackDemo/UMengFeedback_SDK_2.0
+cp -r UMFeedback/Base.lproj ../FeedbackDemo/UMengFeedback_SDK_2.0
+cp -r UMFeedback/zh-Hans.lproj ../FeedbackDemo/UMengFeedback_SDK_2.0
+
+cp Demo/AppDelegate.h Demo/AppDelegate.m ../FeedbackDemo/FeedbackDemo/
+                      cp Demo/ViewController.h Demo/ViewController.m ../FeedbackDemo/FeedbackDemo
+end
+
+task :spec do |t|
+  sh "pod spec lint UMengFeedback.podspec"
+end
+
+task :specUpdate do |t|
+  sh "pod trunk push UMengFeedback.podspec"
+end
