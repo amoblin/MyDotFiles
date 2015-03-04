@@ -11,6 +11,9 @@
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
+;; No Tabs
+(setq-default indent-tabs-mode nil)
+
 ;; 启动时全屏
 (defun fullscreen (&optional f)
   (interactive)
@@ -174,7 +177,7 @@
 (add-to-list 'auto-mode-alist '("\\.apib\\'" . markdown-mode))
 
 ;; PHP Mode
-(require 'php-mode)
+;(require 'php-mode)
 ;(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 ;(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 ;(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
@@ -189,6 +192,17 @@
 (require 'jade-mode)
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; web mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
 
 ;; Adaptive Filling
 (setq adaptive-fill-regexp "[ \t]+\\|[ \t]*\\([0-9]+\\.\\|\\*+\\)[ \t]*")

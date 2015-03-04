@@ -14,9 +14,9 @@ $infoFile = "\`pwd\`/#{$name}/Info"
 $revision = `defaults read #{$infoFile} CFBundleVersion`.rstrip
 $version = `defaults read #{$infoFile} CFBundleShortVersionString`.rstrip
 task :default do |t|
-  puts "info plist version: %s" % $version
+  puts "info plist  version: %s" % $version
   puts "info plist revision: %s" % $revision
-  puts "git log revision: %s" % `git log --pretty=oneline|wc -l`
+  puts " git   log revision: %s" % `git log --pretty=oneline|wc -l|tr -d " "`
 end
 
 task :tag do |t|
