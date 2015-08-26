@@ -14,6 +14,22 @@
 ;; No Tabs
 (setq-default indent-tabs-mode nil)
 
+;设置启动窗口位置大小
+;也可以配置REG文件来实现(更高效)
+;[HKEY_LOCAL_MACHINE\SOFTWARE\GNU\Emacs]
+;"Emacs.Geometry"="100x30+240+70"
+
+(setq default-frame-alist
+    (append
+    '( (top . 310)
+       (left . 540)
+       (width . 110)
+       (height . 35))
+       default-frame-alist))
+
+(setq-default cursor-type 'bar) ; 设置光标为竖线 
+;(setq-default cursor-type 'box) ; 设置光标为方块 
+
 ;; 启动时全屏
 (defun fullscreen (&optional f)
   (interactive)
@@ -33,6 +49,13 @@
 ;; 背景颜色
 (set-background-color "black")
 (set-foreground-color "white")
+
+;(set-cursor-color "black")
+;(set-cursor-color "#ffffff") 
+
+;(setq default-frame-alist
+;   '((cursor-color . "palegoldenrod")))
+
 ;; 当前行高亮
 (global-hl-line-mode 1)
 ;(set-face-background 'hl-line "#efefef")
@@ -93,6 +116,11 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((dot . t)))
+
+
+
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 ;; 设置elpa源
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")

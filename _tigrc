@@ -1,0 +1,6 @@
+bind main g move-first-line
+bind main G move-last-line
+
+bind diff g move-first-line
+bind diff G move-last-line
+bind diff <Enter> edit
