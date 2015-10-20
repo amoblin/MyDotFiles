@@ -3,4 +3,12 @@ bind main G move-last-line
 
 bind diff g move-first-line
 bind diff G move-last-line
+
+bind stage g move-first-line
+bind stage G move-last-line
+
+bind help g move-first-line
+bind help G move-last-line
+
 bind diff <Enter> edit
+bind stage <Enter> edit

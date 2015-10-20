@@ -1,25 +1,21 @@
-
-# only for Linux
-alias ls='ls --color'
-
-## only for OSX
-#alias ls='ls -G'
-#alias rm='rmtrash'
-
-
-## Common alias
 alias .='source'
+#alias ls='ls --color'
 alias ll='ls -lh'
 alias la='ls -A'
 alias diff='colordiff -u'
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rm -i'
+alias rm='rmtrash'
+#alias rm='rm -i'
 alias e="emacsclient -t"
 alias ec="emacsclient -c"
 alias g='git'
+alias gau='git add -u'
+alias gfl='git flow'
+alias ts='tig status'
 
-
+alias o='open'
+alias oe='open -e textedit'
 
 alias grep='grep --color'
 alias cgrep='grep --color=always'
