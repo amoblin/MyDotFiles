@@ -7,18 +7,21 @@
     co = checkout
     br = branch
     au = add -u
-    diffc = diff --cached
+    diffc = diff --cached -C
+    ds = diff --stat
     cdiff = diff --color-words
     desc = describe
     lo = log --pretty=oneline
-    lg = log --graph
+    lg = log --graph --decorate
     lp = log -p
     ln = log --name-status
-    ld = log --decorate
+    ld = log --decorate --graph
 [color]
     ui = auto
 [core]
-    editor = emacs
+#    editor = emacsclient -t
+#    editor = emacs
+    editor = vim
     ignore = pyc
     excludesfile = /etc/gitignore
     quotepath = false
@@ -33,3 +36,17 @@
 #    sslVerify = false
 #[https]
 #    proxy = 127.0.0.1:8087
+[filter "hawser"]
+    clean = git hawser clean %f
+    smudge = git hawser smudge %f
+    required = true
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+[credential]
+    helper = osxkeychain
+[commit]
+    gpgsign = false
+[gpg]
+    program = gpg2
