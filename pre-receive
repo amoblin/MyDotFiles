@@ -7,6 +7,6 @@ BASE=`git merge-base ${PARENTS}`
 if [[ ${PARENTS} =~ ${BASE} ]]; then
     exit 0
 else
-    echo "Error! run the folloing command befor push:\n\n git rebase ${old}\n"
+    echo "Error! Run the following command befor push:\n\n git rebase ${old}\n"
     exit 1
 fi
