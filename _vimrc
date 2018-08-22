@@ -1,7 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -12,8 +8,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'isRuslan/vim-es6'
+Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -30,6 +25,10 @@ Plugin 'isRuslan/vim-es6'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
 " Plugin 'user/L9', {'name': 'newL9'}
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -62,9 +61,6 @@ set guioptions=egmrLt
 "set guifontwide=Hei_Regular:h20
 set linespace=2
 
-
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
 
 " make backspace work like most other apps
 set backspace=2
