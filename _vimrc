@@ -28,6 +28,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-airline/vim-airline'  " 状态栏插件
+Plugin 'vim-airline/vim-airline-themes' " 状态栏主题插件
+Plugin 'scrooloose/nerdtree'    " 目录树插件
+Plugin 'luochen1990/rainbow'      " 为不同的括号添加颜色的插件
 
 
 " All of your Plugins must be added before the following line
@@ -45,6 +49,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+let g:airline#extensions#tabline#enabled = 1
 
 
 "7.3版开始支持持久撤销
@@ -153,8 +162,8 @@ let statusAscii='%o (%b:0x%B) '
 let statusRuler='%l,%c%V [%L] %P'
 let statusEnd='%=%k'.statusTime.statusAscii.statusRuler
 " 最终展示 "
-set statusline=%!statusHead.statusFormatEncoding.statusEnd
 set laststatus=2
+set t_Co=256
 "命令行高度
 set cmdheight=1
 
