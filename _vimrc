@@ -38,6 +38,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:airline#extensions#tabline#enabled = 1
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
 set t_Co=256
 
