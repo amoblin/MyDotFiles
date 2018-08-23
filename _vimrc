@@ -1,4 +1,5 @@
-set nocompatible              " be iMproved, required
+set nocompatible              " be iMproved, required. 不使用vi键盘模式，而是使用vim键盘模式
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -10,29 +11,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-airline/vim-airline'  " 状态栏插件
 Plugin 'vim-airline/vim-airline-themes' " 状态栏主题插件
 Plugin 'scrooloose/nerdtree'    " 目录树插件
 Plugin 'luochen1990/rainbow'      " 为不同的括号添加颜色的插件
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,6 +39,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 let g:airline#extensions#tabline#enabled = 1
 
+set t_Co=256
+
+set laststatus=2
+set cmdheight=1
 
 "7.3版开始支持持久撤销
 if version >= 703
@@ -69,7 +57,6 @@ set guifont=Menlo_Regular:h14
 set guioptions=egmrLt
 "set guifontwide=Hei_Regular:h20
 set linespace=2
-
 
 " make backspace work like most other apps
 set backspace=2
@@ -104,9 +91,6 @@ set pastetoggle=,sp
 
 " use pathogen
 " execute pathogen#infect()
-
-"不使用vi键盘模式，而是使用vim键盘模式
-set nocompatible
 
 " Turn backup on
 set backup
@@ -148,29 +132,6 @@ set wrap
 set novisualbell
 "set noerrorbells
 set vb t_vb="."
-
-"状态行显示的内容（包括文件类型和解码）
-let statusHead='%n:%<%-.50f %h%m%r%y '
-let statusFormatEncoding='%{&ff} [%{(&fenc==""?&enc:&fenc).(&bomb?",BOM":"")}] '
-
-"let statusBreakPoint='%<'
-"let statusCwd='%-.50{getcwd()}'
-" 设置statusEnd"
-"let statusModifyTime='%{strftime("%y-%m-%d",getftime(expand("%")))}'
-let statusTime='%{strftime("%H:%M")} '
-let statusAscii='%o (%b:0x%B) '
-let statusRuler='%l,%c%V [%L] %P'
-let statusEnd='%=%k'.statusTime.statusAscii.statusRuler
-" 最终展示 "
-set laststatus=2
-set t_Co=256
-"命令行高度
-set cmdheight=1
-
-" 状态行颜色
-highlight StatusLine guifg=SlateBlue guibg=Black
-"highlight StatusLineNC guifg=Gray guibg=White
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color
