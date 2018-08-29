@@ -17,6 +17,7 @@ Plugin 'vim-airline/vim-airline'  " 状态栏插件
 Plugin 'vim-airline/vim-airline-themes' " 状态栏主题插件
 Plugin 'scrooloose/nerdtree'    " 目录树插件
 Plugin 'luochen1990/rainbow'      " 为不同的括号添加颜色的插件
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
