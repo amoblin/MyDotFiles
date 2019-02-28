@@ -1,29 +1,14 @@
 [user]
     name = amoblin@mbp
     email = amoblin@gmail.com
-[alias]
-    st = status
-    ci = commit
-    co = checkout
-    br = branch
-    au = add -u
-    diffc = diff --cached -C
-    ds = diff --stat
-    cdiff = diff --color-words
-    desc = describe
-    lo = log --pretty=oneline
-    lg = log --graph --decorate
-    lp = log -p
-    ln = log --name-status
-    ld = log --decorate --graph
 [color]
     ui = auto
 [core]
 #    editor = emacsclient -t
-#    editor = emacs
-    editor = vim
+    editor = e
+#    editor = vim
     ignore = pyc
-    excludesfile = /etc/gitignore
+    excludesfile = /Users/amoblin/.gitignore_global
     quotepath = false
 [push]
     default = upstream
@@ -48,5 +33,12 @@
     helper = osxkeychain
 [commit]
     gpgsign = false
+    template = /Users/amoblin/.stCommitMsg
 [gpg]
     program = gpg2
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path = 
+[mergetool "sourcetree"]
+     cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+     trustExitCode = true
