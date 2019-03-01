@@ -9,8 +9,6 @@ alias rm='rmtrash'
 #alias rm='rm -i'
 alias e="emacsclient -t"
 alias ec="emacsclient -c"
-alias g='git'
-alias gau='git add -u'
 alias gfl='git flow'
 alias ts='tig status'
 
@@ -29,3 +27,5 @@ alias sudo='sudo '
 #
 
 alias screen='export SCREENPWD=$(pwd);screen'
+
+alias f=flutter

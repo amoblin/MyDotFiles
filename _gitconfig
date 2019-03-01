@@ -33,7 +33,7 @@
     helper = osxkeychain
 [commit]
     gpgsign = false
-    template = /Users/amoblin/.stCommitMsg
+#    template = /Users/amoblin/.stCommitMsg
 [gpg]
     program = gpg2
 [difftool "sourcetree"]
