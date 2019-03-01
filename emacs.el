@@ -1,11 +1,11 @@
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 ;; 隐藏工具栏
-(tool-bar-mode -1)
+;;(tool-bar-mode -1)
 ;; 禁用menubar
 (menu-bar-mode -1)
 ;; 禁用滚动条
-(scroll-bar-mode -1)
+;;(scroll-bar-mode -1)
 ;; kill buffer without confirm
 (global-set-key [(control x) (k)] 'kill-this-buffer)
 ;; 设置第三方插件安装目录
@@ -13,6 +13,8 @@
 
 ;; No Tabs
 (setq-default indent-tabs-mode nil)
+
+(setq tab-width 2) ; 2空格缩进
 
 ;设置启动窗口位置大小
 ;也可以配置REG文件来实现(更高效)
@@ -29,6 +31,9 @@
 
 (setq-default cursor-type 'bar) ; 设置光标为竖线 
 ;(setq-default cursor-type 'box) ; 设置光标为方块 
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)))
 
 ;; 启动时全屏
 (defun fullscreen (&optional f)
@@ -95,29 +100,6 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 
-(defun nolinum ()
-  (global-linum-mode 0)
-)
-;;(add-hook 'shell-mode-hook 'nolinum)
-
-;;开启dot画图
-(defvar org-list-allow-alphabetical t)
-(defun  org-element-bold-successor           (arg))
-(defun  org-element-code-successor           (arg))
-(defun  org-element-entity-successor         (arg))
-(defun  org-element-italic-successor         (arg))
-(defun  org-element-latex-fragment-successor (arg))
-(defun  org-element-strike-through-successor (arg))
-(defun  org-element-subscript-successor      (arg))
-(defun  org-element-superscript-successor    (arg))
-(defun  org-element-underline-successor      (arg))
-(defun  org-element-verbatim-successor       (arg))
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((dot . t)))
-
-
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -125,11 +107,15 @@
 ;; 设置elpa源
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 ;; auto update package list
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+(require 'neotree)
+(neotree-toggle)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -138,65 +124,66 @@
 ;(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 ;; multi-term.el
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
+;(require 'multi-term)
+;(setq multi-term-program "/bin/bash")
 ;(setq multi-term-program "/bin/zsh")
-(global-set-key (kbd "C-c z") (quote multi-term))
+;(global-set-key (kbd "C-c z") (quote multi-term))
 
 
 ;; tabbar mode
-(require 'tabbar)
-(tabbar-mode t)
+;(require 'tabbar)
+;(tabbar-mode t)
 ;; 禁用分组
-(setq tabbar-buffer-groups-function nil)
+;(setq tabbar-buffer-groups-function nil)
 
 (global-set-key [(meta n)] 'tabbar-forward)
 (global-set-key [(meta p)] 'tabbar-backward)
 
 ;; 80 column indicator
-(require 'fill-column-indicator)
-(setq fci-rule-width 1)
-(setq fci-rule-color "gray")
+;(require 'fill-column-indicator)
+;(setq fci-rule-width 1)
+;(setq fci-rule-color "gray")
 ;(add-hook 'after-change-major-mode-hook 'fci-mode)
-(setq-default fci-rule-column 80)
-(setq fci-handle-truncate-lines nil)
+;(setq-default fci-rule-column 80)
+;(setq fci-handle-truncate-lines nil)
 
 ;; zsh
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 ;; Org-Mode
-(require 'ox-gfm)
-(setq org-hide-leading-stars t)
-(setq org-log-done 'time)
-(define-key global-map "\C-ca" 'org-agenda)
-(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+;(require 'ox-gfm)
+;(setq org-hide-leading-stars t)
+;(setq org-log-done 'time)
+;(define-key global-map "\C-ca" 'org-agenda)
+;(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+;(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 ;; org中源码高亮显示
-(setq org-src-fontify-natively t)
+;(setq org-src-fontify-natively t)
 ;; 导出html时源码高亮显示
-(require 'htmlize)
+;(require 'htmlize)
 ;; 导出markdown
-(eval-after-load "org"
-  '(require 'ox-md nil t))
+;(eval-after-load "org"
+;  '(require 'ox-md nil t))
 
 ;; Golang
-(require 'go-mode)
+;(require 'go-mode)
 
 ;; Common Lisp
 ; slime setup
-(setq inferior-lisp-program "sbcl")
-(require 'slime)
-(slime-setup)
+;(setq inferior-lisp-program "sbcl")
+;(require 'slime)
+;(slime-setup)
 
 ;; Presentation/ Slide
 ;; retrieve at https://github.com/yjwen/org-reveal/
-(require 'ox-reveal)
+;(require 'ox-reveal)
 
 ;; Swift Mode
-(require 'swift-mode) 
+;(require 'swift-mode) 
 
 ;; Markdown Mode
-(add-to-list 'load-path "~/.emacs.d/modes")
+(add-to-list 'load-path "~/.emacs.d/dev-repo/markdown-mode")
+;;(add-to-list 'load-path "~/.emacs.d/modes")
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
@@ -210,26 +197,22 @@
 ;(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 ;(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
-;; Projectile
-(require 'projectile)
-(projectile-global-mode)
-
 ;; Jade Mode
-(add-to-list 'load-path "~/.emacs.d/vendor/jade-mode")
-(require 'sws-mode)
-(require 'jade-mode)
-(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
-(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+;(add-to-list 'load-path "~/.emacs.d/vendor/jade-mode")
+;(require 'sws-mode)
+;(require 'jade-mode)
+;(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+;(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
 ;; web mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;(require 'web-mode)
+;(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
 
 ;; Adaptive Filling
@@ -294,3 +277,17 @@
 ;(evil-mode 1)
 ;(setq evil-default-state 'emacs)
 ;(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
