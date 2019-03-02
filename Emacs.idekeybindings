@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>Text Key Bindings</key>
+	<dict>
+		<key>Key Bindings</key>
+		<dict>
+			<key></key>
+			<array>
+				<string>scrollPageDown:</string>
+				<string>moveToBeginningOfParagraph:</string>
+				<string>moveToEndOfParagraph:</string>
+			</array>
+			<key>^a</key>
+			<string>moveToBeginningOfLine:</string>
+			<key>^e</key>
+			<string>moveToEndOfLine:</string>
+			<key>~&lt;</key>
+			<string>moveToBeginningOfDocument:</string>
+			<key>~&gt;</key>
+			<string>moveToEndOfDocument:</string>
+			<key>~b</key>
+			<string>moveWordBackward:</string>
+			<key>~f</key>
+			<string>moveWordForward:</string>
+			<key>~v</key>
+			<string>pageUp:</string>
+		</dict>
+		<key>Version</key>
+		<integer>3</integer>
+	</dict>
+</dict>
 </plist>
