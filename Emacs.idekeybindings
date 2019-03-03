@@ -2,6 +2,270 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Menu Key Bindings</key>
+	<dict>
+		<key>Key Bindings</key>
+		<array>
+			<dict>
+				<key>Action</key>
+				<string>ReleaseGPUFrame:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.PauseContinue</string>
+				<key>CommandID</key>
+				<string>Xcode.GPUToolsKit.CmdDefinition.ReleaseGPUFrame</string>
+				<key>Group</key>
+				<string>Debug Menu for GPU Frame Debugger</string>
+				<key>GroupID</key>
+				<string>Xcode.GPUToolsKit.MenuDefinition.Debug</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~k</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Release GPU Frame</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>stepToNextDisplayableCall:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.StepOver</string>
+				<key>CommandID</key>
+				<string>Xcode.GPUToolsKit.CmdDefinition.StepNextDisplayableCall</string>
+				<key>Group</key>
+				<string>Debug Menu for GPU Frame Debugger</string>
+				<key>GroupID</key>
+				<string>Xcode.GPUToolsKit.MenuDefinition.Debug</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>^~j</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Step to Next Draw/Dispatch Call</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>find:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.Find</string>
+				<key>Group</key>
+				<string>Find Menu</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.Main</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>^s</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Find…</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>jumpToLine:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>Group</key>
+				<string>Navigate Menu for Documentation</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.DocViewingNavigateMenu</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~g</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Jump To…</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>jumpToLine:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>Group</key>
+				<string>Navigate Menu for Playground</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusPlaygroundEditor.MenuDefinition.Navigate</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~g</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Jump To…</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>jumpToLine:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>Group</key>
+				<string>Navigate Menu for Source Code</string>
+				<key>GroupID</key>
+				<string>Xcode.IDESourceEditor.MenuDefinition.Navigate</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~g</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Jump To…</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>jumpToLine:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>Group</key>
+				<string>Navigate Menu for Source Code Comparison</string>
+				<key>GroupID</key>
+				<string>Xcode.IDESourceEditor.MenuDefinition.Navigate</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~g</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Jump To…</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>pauseOrContinue:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.PauseContinue</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.PauseContinue</string>
+				<key>Group</key>
+				<string>Debug Menu</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.Main</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~k</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Pause / Continue</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>stepInto:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.StepInto</string>
+				<key>Group</key>
+				<string>Debug Menu</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.Main</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>^~l</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Step Into</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>stepOut:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.StepOut</string>
+				<key>Group</key>
+				<string>Debug Menu</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.Main</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>^~h</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Step Out</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>stepOver:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.StepOver</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.StepOver</string>
+				<key>Group</key>
+				<string>Debug Menu</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.Main</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>^~j</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Step Over</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>undo:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.Undo</string>
+				<key>Group</key>
+				<string>Edit Menu</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEKit.MenuDefinition.Main</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>^u</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Undo</string>
+			</dict>
+		</array>
+		<key>Version</key>
+		<integer>3</integer>
+	</dict>
 	<key>Text Key Bindings</key>
 	<dict>
 		<key>Key Bindings</key>
@@ -10,6 +274,7 @@
 			<array>
 				<string>scrollPageDown:</string>
 				<string>moveToBeginningOfParagraph:</string>
+				<string>moveWordForward:</string>
 				<string>moveToEndOfParagraph:</string>
 			</array>
 			<key>^a</key>
@@ -22,8 +287,8 @@
 			<string>moveToEndOfDocument:</string>
 			<key>~b</key>
 			<string>moveWordBackward:</string>
-			<key>~f</key>
-			<string>moveWordForward:</string>
+			<key>~d</key>
+			<string>deleteWordForward:</string>
 			<key>~v</key>
 			<string>pageUp:</string>
 		</dict>
