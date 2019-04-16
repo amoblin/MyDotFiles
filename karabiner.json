@@ -192,8 +192,41 @@
                 }
             ],
             "name": "MX8.0",
-            "selected": false,
-            "simple_modifications": [],
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "right_alt"
+                    },
+                    "to": {
+                        "key_code": "right_option"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "right_gui"
+                    },
+                    "to": {
+                        "key_code": "right_command"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "left_gui"
+                    },
+                    "to": {
+                        "key_code": "left_command"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "left_alt"
+                    },
+                    "to": {
+                        "key_code": "left_option"
+                    }
+                }
+            ],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "country_code": 0,
@@ -324,8 +357,16 @@
                 }
             ],
             "name": "G80",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "application"
+                    },
+                    "to": {
+                        "key_code": "fn"
+                    }
+                },
                 {
                     "from": {
                         "key_code": "caps_lock"
@@ -364,14 +405,6 @@
                     },
                     "to": {
                         "key_code": "right_option"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "application"
-                    },
-                    "to": {
-                        "key_code": "fn"
                     }
                 }
             ],
