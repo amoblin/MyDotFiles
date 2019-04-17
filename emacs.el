@@ -35,6 +35,20 @@
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)))
 
+;; active Org-babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(;; other Babel languages
+   (plantuml . t)))
+(setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
+
+;; Enable plantuml-mode for PlantUML files
+(setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
+
 ;; 启动时全屏
 (defun fullscreen (&optional f)
   (interactive)
