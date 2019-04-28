@@ -1,25 +1,30 @@
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
-;; 隐藏工具栏
-;;(tool-bar-mode -1)
-;; 禁用menubar
-(menu-bar-mode -1)
-;; 禁用滚动条
-;;(scroll-bar-mode -1)
-;; kill buffer without confirm
-(global-set-key [(control x) (k)] 'kill-this-buffer)
+
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
 ;; No Tabs
 (setq-default indent-tabs-mode nil)
 
+;; 不提示软连接到Git仓库里的文件
+(setq vc-follow-symlinks nil)
+
 (setq tab-width 2) ; 2空格缩进
+
+;;(ac-config-default)
 
 ;设置启动窗口位置大小
 ;也可以配置REG文件来实现(更高效)
 ;[HKEY_LOCAL_MACHINE\SOFTWARE\GNU\Emacs]
 ;"Emacs.Geometry"="100x30+240+70"
+
+;; shortcut keybinding
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+
+;; kill buffer without confirm
+(global-set-key [(control x) (k)] 'kill-this-buffer)
 
 (setq default-frame-alist
     (append
@@ -93,7 +98,8 @@
 ;;(desktop-save-mode 1)
 
 ;; 显示行号
-(global-linum-mode 1)
+(global-linum-mode t)
+
 (setq linum-format "%d ")
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
@@ -128,8 +134,19 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(require 'neotree)
+;;
+(require 'all-the-icons)
+
+;;(require 'neotree)
+;;(use-package neotree
+;;  :after
+;;  ;; Load the above patches
+;;  )
+
+(setq inhibit-compacting-font-caches t)
 (neotree-toggle)
+;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+(setq neo-theme 'icons)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -234,9 +251,17 @@
 
 ;; 语法高亮
 ;(add-auto-mode 'ruby-mode "Podfile\\'" "\\.podspec\\'")
-(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode)) ;; support Podfiles
-(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
-(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+;(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode)) ;; support Podfiles
+;(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
+;(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+(setq rspec-use-rvm t)
+(defadvice rspec-compile (around rspec-compile-around)
+  "Use BASH shell for running the specs because of ZSH issues."
+  (let ((shell-file-name "/bin/bash"))
+    ad-do-it))
+
+(ad-activate 'rspec-compile)
 
 ;; iimage mode
 ;(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
@@ -296,9 +321,22 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+
+ ;; 禁用menubar
+ '(menu-bar-mode nil)
+
  '(package-selected-packages
    (quote
-    (markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode))))
+    (jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
+
+ ;; 禁用滚动条
+ '(scroll-bar-mode nil)
+
+ ;; 隐藏工具栏
+ '(tool-bar-mode nil)
+
+ '(tooltip-mode nil)
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

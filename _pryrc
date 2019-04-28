@@ -1,0 +1,2 @@
+Pry.config.editor = "emacsclient -t"
+#Pry.config.editor = "vim"
