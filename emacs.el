@@ -25,6 +25,7 @@
 
 ;; shortcut keybinding
 (global-set-key (kbd "C-x t") 'multi-term)
+(global-set-key (kbd "C-x d") 'neotree-toggle)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 ;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
@@ -143,14 +144,13 @@
 ;;
 (require 'all-the-icons)
 
-;;(require 'neotree)
+(require 'neotree)
 ;;(use-package neotree
 ;;  :after
 ;;  ;; Load the above patches
 ;;  )
 
 (setq inhibit-compacting-font-caches t)
-(neotree-toggle)
 ;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 (setq neo-theme 'icons)
 
@@ -331,6 +331,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
+ '(custom-safe-themes
+   (quote
+    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" default)))
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote

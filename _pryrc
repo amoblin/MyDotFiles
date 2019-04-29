@@ -1,5 +1,7 @@
 if ENV['INSIDE_EMACS']
   Pry.config.correct_indent = false
   Pry.config.pager = false
+  Pry.config.editor = "emacsclient -n"
+else
+  Pry.config.editor = "emacsclient -s ws2 -t"
 end
-Pry.config.editor = "emacsclient -s ws2 -t"
