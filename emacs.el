@@ -24,6 +24,7 @@
 ;"Emacs.Geometry"="100x30+240+70"
 
 ;; shortcut keybinding
+(global-set-key (kbd "C-x t") 'multi-term)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 ;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 

@@ -9,7 +9,13 @@ alias rm='rmtrash'
 #alias rm='rm -i'
 
 export ALTERNATE_EDITOR=""
-alias e="emacsclient -t "
+
+if [ -n "$INSIDE_EMACS" ]; then
+  alias e="emacsclient -n "
+else
+  alias e="emacsclient -t "
+fi
+
 alias ee="emacsclient -e "
 alias en="emacsclient -s ws2 -t"
 alias es="emacsclient -e '(save-buffers-kill-emacs)'"
