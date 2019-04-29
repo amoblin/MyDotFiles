@@ -1,19 +1,25 @@
 #!/bin/sh
 
 # install oh-my-zsh
-if [ -d "~/.oh-my-zsh" ];then
-    curl -L http://install.ohmyz.sh | sh
-fi
+[ -d "$HOME/.oh-my-zsh" ] || (curl -L http://install.ohmyz.sh | sh)
 
 # zsh config
-ln amoblin.zsh ~/.oh-my-zsh/custom
-ln amoblin.zsh-theme ~/.oh-my-zsh/theme
+#ln amoblin.zsh ~/.oh-my-zsh/custom
+#ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
-# alias config
-ln _alias ~/.alias
+confs="_aliasrc _pryrc"
+
+for conf in $confs; do
+    #    [ -s "$HOME/.vimrc" ] || ln -sf `pwd`/_vimrc $HOME/.vimrc
+    dist=`echo $conf|sed 's/_/./'`
+    echo $conf $dist
+    ln -sf `pwd`/$conf ~/$dist
+done
+
+exit
 
 #tmux config
-ln _tmux.conf ~/.tmux.conf
+ln -sf `pwd`/_tmux.conf ~/.tmux.conf
 
 #ln _vimrc ~/.vimrc
 #mkdir -p ~/.vim/backup
