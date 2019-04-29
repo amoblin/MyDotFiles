@@ -60,7 +60,11 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  autojump
   git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,7 +100,7 @@ source ~/.alias
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/MyDocuments/bin:$HOME/MyDocuments/flutter/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/go/bin:"
+export PATH="/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/MyDocuments/bin:$HOME/MyDocuments/flutter/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/go/bin:$HOME/.cargo/bin:"
 
 
 
@@ -105,3 +109,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+. _customrc
