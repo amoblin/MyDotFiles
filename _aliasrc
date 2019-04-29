@@ -7,8 +7,16 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rmtrash'
 #alias rm='rm -i'
-alias e="emacsclient -t"
-alias ec="emacsclient -c"
+
+export ALTERNATE_EDITOR=""
+alias e="emacsclient -t "
+ec() {
+  nohup emacsclient -c $* > /dev/null 2>&1 &
+}
+alias ee="emacsclient -e "
+alias en="emacsclient -s ws2 -t"
+alias es="emacsclient -e '(save-buffers-kill-emacs)'"
+
 alias ts='tig status'
 alias pi='pod install'
 

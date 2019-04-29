@@ -1,6 +1,10 @@
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 
+(setq menu-bar-mode nil)
+
+(set-default-font "Source Code Pro 24")
+
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
@@ -69,6 +73,7 @@
 ;;(color-theme-initialize)
 ;; dark
 ;;(color-theme-tty-dark)
+;;(color-theme-sanityinc-tomorrow)
 
 ;; 背景颜色
 (set-background-color "black")
@@ -289,12 +294,6 @@
 
 ;; 字体和编码
 ;; 设置英文字体
-(if (display-graphic-p)
-(set-face-attribute 'default nil :font "Menlo 14" :height 140))
-(if (display-graphic-p)
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font (frame-parameter nil 'font)
-       charset (font-spec :family "Heiti_SC" :size 14))))
 
 ;; UTF-8 settings
 (set-language-environment 'UTF-8)
@@ -321,22 +320,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
- ;; 禁用menubar
  '(menu-bar-mode nil)
 
  '(package-selected-packages
    (quote
-    (jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
-
- ;; 禁用滚动条
+    (color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
  '(scroll-bar-mode nil)
-
- ;; 隐藏工具栏
  '(tool-bar-mode nil)
-
- '(tooltip-mode nil)
- )
+ '(tooltip-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
