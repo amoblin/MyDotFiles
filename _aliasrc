@@ -10,12 +10,13 @@ alias rm='rmtrash'
 
 export ALTERNATE_EDITOR=""
 alias e="emacsclient -t "
-ec() {
-  nohup emacsclient -c $* > /dev/null 2>&1 &
-}
 alias ee="emacsclient -e "
 alias en="emacsclient -s ws2 -t"
 alias es="emacsclient -e '(save-buffers-kill-emacs)'"
+
+ec() {
+  nohup emacsclient -c $* > /dev/null 2>&1 &
+}
 
 alias ts='tig status'
 alias pi='pod install'

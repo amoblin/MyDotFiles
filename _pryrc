@@ -1,2 +1,5 @@
-Pry.config.editor = "en"
-#Pry.config.editor = "vim"
+if ENV['INSIDE_EMACS']
+  Pry.config.correct_indent = false
+  Pry.config.pager = false
+end
+Pry.config.editor = "emacsclient -s ws2 -t"

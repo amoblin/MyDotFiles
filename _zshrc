@@ -69,7 +69,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.alias
+source ~/.aliasrc
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -109,4 +109,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-. _customrc
+
+if [[ $TERM = dumb ]]; then
+  unset zle_bracketed_paste
+fi
+
+source ~/.customrc

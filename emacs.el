@@ -259,6 +259,16 @@
 ;(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode)) ;; support Podfiles
 ;(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
 ;(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+
+(defun copy-shell-environment-variables ()
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+(copy-shell-environment-variables)
+(setenv "VISUAL" "emacsclient")
+(setenv "EDITOR" (getenv "VISUAL"))
+
+
+
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (setq rspec-use-rvm t)
 (defadvice rspec-compile (around rspec-compile-around)
@@ -321,10 +331,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(menu-bar-mode nil)
-
  '(package-selected-packages
    (quote
-    (color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
+    (eterm-256color multi-run multi-term color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
