@@ -99,19 +99,19 @@ source ~/.aliasrc
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/MyDocuments/bin:$HOME/MyDocuments/flutter/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/go/bin:$HOME/.cargo/bin:"
-
+export MyDoc=$HOME/MyDocuments
+export PATH="/usr/local/bin:$PATH:$HOME/.rvm/bin:$MyDoc/bin:$HOME/flutter/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
 fi
 
-source ~/.customrc
+[ -s "$HOME/.customrc" ] && \. "$HOME/.customrc"]
