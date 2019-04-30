@@ -122,8 +122,11 @@
 
 ;; projectile
 
+;; fix find file bug
+(setq projectile-git-submodule-command nil)
+
 (setq projectile-enable-caching t)
-(setq projectile-keymap-prefix (kbd "C-c"))
+(setq projectile-keymap-prefix (kbd "C-c p"))
 
 
 (defun insert-date (prefix)
@@ -356,7 +359,7 @@
     (eterm-256color multi-run multi-term color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
- (projectile-global-mode)
+ (counsel-projectile-mode)
  '(tooltip-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -114,4 +114,4 @@ if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
 fi
 
-[ -s "$HOME/.customrc" ] && \. "$HOME/.customrc"]
+[ -s "$HOME/.customrc" ] && \. "$HOME/.customrc"
