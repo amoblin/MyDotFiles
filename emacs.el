@@ -18,12 +18,20 @@
 
 ;;(ac-config-default)
 
+(setq redisplay-dont-pause t
+  scroll-margin 10
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
+
 ;设置启动窗口位置大小
 ;也可以配置REG文件来实现(更高效)
 ;[HKEY_LOCAL_MACHINE\SOFTWARE\GNU\Emacs]
 ;"Emacs.Geometry"="100x30+240+70"
 
 ;; shortcut keybinding
+(global-unset-key (kbd "C-x C-c"))
+(global-set-key (kbd "C-x C-c") 'kill-this-buffer)
 (global-set-key (kbd "C-x t") 'multi-term)
 (global-set-key (kbd "C-x d") 'neotree-toggle)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
@@ -110,6 +118,13 @@
 (setq linum-format "%d ")
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
+
+
+;; projectile
+
+(setq projectile-enable-caching t)
+(setq projectile-keymap-prefix (kbd "C-c"))
+
 
 (defun insert-date (prefix)
   "Insert the current date. With prefix-argument, use ISO format. With
@@ -341,6 +356,7 @@
     (eterm-256color multi-run multi-term color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
+ (projectile-global-mode)
  '(tooltip-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
