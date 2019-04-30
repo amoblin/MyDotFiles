@@ -7,26 +7,22 @@
 #ln amoblin.zsh ~/.oh-my-zsh/custom
 #ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
-confs="_aliasrc _pryrc"
+confs="_aliasrc _pryrc _zshrc _tigrc"
+confs=$confs" _tmux.conf"
+confs=$confs" _gitconfig"
+confs=$confs"  _vimrc _screenrc"
+confs=$confs"  "
+confs=$confs"  "
 
 for conf in $confs; do
-    #    [ -s "$HOME/.vimrc" ] || ln -sf `pwd`/_vimrc $HOME/.vimrc
     dist=`echo $conf|sed 's/_/./'`
     echo $conf $dist
-    ln -sf `pwd`/$conf ~/$dist
+    [ -s "$HOME/$dist" ] || ln -sf `pwd`/$conf $HOME/$dist
 done
 
 exit
 
-#tmux config
-ln -sf `pwd`/_tmux.conf ~/.tmux.conf
-
-#ln _vimrc ~/.vimrc
 #mkdir -p ~/.vim/backup
-
-#ln _screenrc ~/.screenrc
-
-#sudo cp gitconfig /etc/
 
 # bash config
 #sudo sh -c "cat inputrc >> /etc/inputrc"
