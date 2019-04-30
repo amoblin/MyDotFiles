@@ -8,11 +8,11 @@
 #ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
 confs="_aliasrc _pryrc _zshrc _tigrc"
-confs=$confs" _tmux.conf"
-confs=$confs" _gitconfig"
-confs=$confs"  _vimrc _screenrc"
-confs=$confs"  "
-confs=$confs"  "
+#confs=$confs" _tmux.conf"
+#confs=$confs" _gitconfig"
+confs=$confs"  _vimrc _screenrc _xvimrc"
+#confs=$confs"  "
+#confs=$confs"  "
 
 for conf in $confs; do
     dist=`echo $conf|sed 's/_/./'`
