@@ -7,9 +7,7 @@
 #ln amoblin.zsh ~/.oh-my-zsh/custom
 #ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
-confs="_aliasrc _pryrc _zshrc _tigrc"
-#confs=$confs" _tmux.conf"
-#confs=$confs" _gitconfig"
+confs="_aliasrc _gitconfig _gitignore _pryrc _tigrc _tmux.conf _zshrc"
 confs=$confs"  _vimrc _screenrc _xvimrc"
 #confs=$confs"  "
 #confs=$confs"  "

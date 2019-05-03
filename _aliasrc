@@ -1,11 +1,10 @@
 alias .='source'
 #alias ls='ls --color'
-alias ll='ls -lh'
-alias la='ls -A'
 alias diff='colordiff -u'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rmtrash'
+alias be='bundle exec'
 #alias rm='rm -i'
 
 export ALTERNATE_EDITOR=""

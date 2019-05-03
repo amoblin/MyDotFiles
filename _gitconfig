@@ -7,8 +7,7 @@
 #    editor = emacsclient -t
     editor = e
 #    editor = vim
-    ignore = pyc
-    excludesfile = /Users/amoblin/.gitignore_global
+    excludesfile = ~/.gitignore
     quotepath = false
 [push]
     default = upstream
