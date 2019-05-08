@@ -1,4 +1,5 @@
-set nocompatible              " be iMproved, required. 不使用vi键盘模式，而是使用vim键盘模式
+"不使用vi键盘模式，而是使用vim键盘模式
+set nocompatible
 
 filetype off                  " required
 
@@ -18,6 +19,8 @@ Plugin 'vim-airline/vim-airline-themes' " 状态栏主题插件
 Plugin 'scrooloose/nerdtree'    " 目录树插件
 Plugin 'luochen1990/rainbow'      " 为不同的括号添加颜色的插件
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'isRuslan/vim-es6'
+Plugin 'dart-lang/dart-vim-plugin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,6 +137,29 @@ set wrap
 set novisualbell
 "set noerrorbells
 set vb t_vb="."
+
+"状态行显示的内容（包括文件类型和解码）
+let statusHead='%n:%<%-.50f %h%m%r%y '
+let statusFormatEncoding='%{&ff} [%{(&fenc==""?&enc:&fenc).(&bomb?",BOM":"")}] '
+
+"let statusBreakPoint='%<'
+"let statusCwd='%-.50{getcwd()}'
+" 设置statusEnd"
+"let statusModifyTime='%{strftime("%y-%m-%d",getftime(expand("%")))}'
+let statusTime='%{strftime("%H:%M")} '
+let statusAscii='%o (%b:0x%B) '
+let statusRuler='%l,%c%V [%L] %P'
+let statusEnd='%=%k'.statusTime.statusAscii.statusRuler
+" 最终展示 "
+set statusline=%!statusHead.statusFormatEncoding.statusEnd
+set laststatus=2
+"命令行高度
+set cmdheight=1
+
+" 状态行颜色
+highlight StatusLine guifg=SlateBlue guibg=Black
+"highlight StatusLineNC guifg=Gray guibg=White
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color
@@ -438,8 +464,8 @@ func SetTitle()
 		call setline(1,"\#!/bin/bash") 
 		call append(line("."), "") 
     elseif &filetype == 'python'
-        call setline(1,"#!/usr/bin/env python")
-        call append(line("."),"# coding=utf-8")
+        call setline(1,"#!/usr/bin/env python3")
+        call append(line("."),"# -*- coding: utf-8 -*-")
 		call append(line(".")+1, "# File Name: ".expand("%")) 
 		call append(line(".")+2, "# Author: amoblin <amoblin@gmail.com>") 
 		call append(line(".")+3, "# Created Time: ".strftime("%c")) 
