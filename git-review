@@ -1,0 +1,25 @@
+#!/bin/sh -e
+# origin code from https://stackoverflow.com/questions/7101145/how-to-configure-specific-upstream-push-refspec-for-git-when-used-with-gerrit/7141743#7141743
+
+if [ -z "$1" ]; then
+    REMOTE=origin
+else
+    REMOTE=$1
+fi
+
+if [ -z "$2" ]; then
+    BRANCH=`git symbolic-ref HEAD`
+    case $BRANCH in
+        refs/heads/*)
+            BRANCH=`basename $BRANCH`
+            ;;
+        *)
+            echo "I can't figure out which branch you are on."
+            exit 1
+            ;;
+    esac
+else
+    BRANCH=$2
+fi
+
+git push $REMOTE HEAD:refs/for/$BRANCH
