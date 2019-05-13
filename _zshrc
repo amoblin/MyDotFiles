@@ -32,23 +32,20 @@ ZSH_THEME="robbyrussell"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-#  autojump
   git
-#  zsh-autosuggestions
+  zsh-autosuggestions
   zsh-syntax-highlighting
-  z
 )
 source $ZSH/oh-my-zsh.sh
 
 source ~/.aliasrc
 export MyDoc=$HOME/MyDocuments
 export PATH="/usr/local/bin:$PATH:$HOME/.rvm/bin:$MyDoc/bin:$HOME/flutter/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:"
+export NVM_DIR="$HOME/.nvm"
+
+#export EDITOR="emacs"
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste

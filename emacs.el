@@ -30,12 +30,41 @@
 ;"Emacs.Geometry"="100x30+240+70"
 
 ;; shortcut keybinding
+
+;;(normal-erase-is-backspace-mode 1)
+(global-set-key (kbd "C-?") 'help-command)
+(global-set-key (kbd "M-?") 'mark-paragraph)
+(global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "M-h") 'backward-kill-word)
+
 (global-unset-key (kbd "C-x C-c"))
 (global-set-key (kbd "C-x C-c") 'kill-this-buffer)
 (global-set-key (kbd "C-x t") 'multi-term)
 (global-set-key (kbd "C-x d") 'neotree-toggle)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 ;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+
+;(when (fboundp 'csv-mode)
+
+;  (defun my-config ()
+;    "For use in `csv-mode-hook'."
+;    (local-set-key (kbd "tab") 'csv-forward-field)
+;    (local-set-key (kbd "S-TAB") 'csv-backward-field)
+;    ;; more stuff here
+;    )
+
+;  (add-hook 'csv-mode-hook 'my-config)
+;  )
+
+(add-hook 'csv-mode-hook ;; guessing
+          '(lambda ()
+             (local-set-key (kbd "TAB") 'csv-forward-field)
+             (local-set-key (kbd "<backtab>") 'csv-backward-field)
+             (local-set-key (kbd "C-c h") 'csv-header-line)
+             (local-set-key (kbd "C-c a") (kbd "C-c C-a C-c h C-c h"))
+             (local-set-key (kbd "C-c u") (kbd "C-c C-u C-c h C-c h"))
+             (csv-header-line)
+             ))
 
 ;; kill buffer without confirm
 (global-set-key [(control x) (k)] 'kill-this-buffer)

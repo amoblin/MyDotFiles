@@ -1,4 +1,4 @@
-alias .='source'
+#alias .='source'
 #alias ls='ls --color'
 alias diff='colordiff -u'
 alias cp='cp -i'
@@ -43,3 +43,5 @@ alias sudo='sudo '
 alias screen='export SCREENPWD=$(pwd);screen'
 
 alias f=flutter
+
+alias loadnvm=". $NVM_DIR/nvm.sh"
