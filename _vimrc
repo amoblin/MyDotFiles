@@ -1,6 +1,22 @@
 "不使用vi键盘模式，而是使用vim键盘模式
 set nocompatible
 
+" Mimic Emacs Line Editing in Insert Mode Only
+inoremap <C-A> <Home>
+inoremap <C-B> <Left>
+inoremap <C-E> <End>
+inoremap <C-F> <Right>
+inoremap <C-P> <Up>
+inoremap <C-N> <Down>
+" â is <Alt-B>
+inoremap â <C-Left>
+" æ is <Alt-F>
+"inoremap æ <C-Right>
+inoremap <C-K> <Esc>ld$a
+inoremap <C-U> <Esc>d0xi
+inoremap <C-Y> <Esc>Pa
+inoremap <C-X><C-S> <Esc>:w<CR>a
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -12,15 +28,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-airline/vim-airline'  " 状态栏插件
 Plugin 'vim-airline/vim-airline-themes' " 状态栏主题插件
 Plugin 'scrooloose/nerdtree'    " 目录树插件
 Plugin 'luochen1990/rainbow'      " 为不同的括号添加颜色的插件
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'isRuslan/vim-es6'
-Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

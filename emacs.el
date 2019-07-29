@@ -80,6 +80,7 @@
 (setq-default cursor-type 'bar) ; 设置光标为竖线 
 ;(setq-default cursor-type 'box) ; 设置光标为方块 
 
+(setq org-confirm-babel-evaluate nil)
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)))
 
@@ -94,6 +95,7 @@
 (setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
 
@@ -104,6 +106,8 @@
 			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
 			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;;(require 'maxframe)
 ;;(add-hook 'window-setup-hook 'maximize-frame t)
@@ -202,6 +206,8 @@
 (setq neo-theme 'icons)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq js-indent-level 2)
 
 ;; dockerfile-mode
 ;(require 'dockerfile-mode)
@@ -308,14 +314,45 @@
 ;(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
 ;(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
+
+(require 'eglot)
+;(add-hook 'ruby-mode-hook 'eglot-ensure)
+;(add-to-list 'eglot-server-programs '(ruby-mode . ("solargraph" "socket")))
+
+;(require 'lsp-mode)
+;(require 'lsp-clients)
+
+;(lsp-register-client
+; (make-lsp-client :new-connection (lsp-tramp-connection "solargraph socket")
+;                  :major-modes '(ruby-mode)
+;                  :remote? t
+;                  :server-id 'solargraph))
+
+;(add-hook 'ruby-mode-hook #'lsp)
+
+(when (featurep 'cocoa)
+  ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+;(require 'company-lsp)
+;(push 'company-lsp company-backends)
+
+;(lsp-define-stdio-client
+; lsp-ruby-mtsmfm "ruby"
+; nil
+; '("language_server-ruby" "--experimental-features")
+; :initialize 'lsp-ruby--initialize-client)
+
+;(lsp-define-stdio-client 'ruby-mode "ruby" 'stdio
+;                         #'projectile-project-root
+;                         '("solargraph socket"))
+
 (defun copy-shell-environment-variables ()
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 (copy-shell-environment-variables)
 (setenv "VISUAL" "emacsclient")
 (setenv "EDITOR" (getenv "VISUAL"))
-
-
 
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (setq rspec-use-rvm t)
@@ -373,26 +410,35 @@
 ;(evil-mode 1)
 ;(setq evil-default-state 'emacs)
 ;(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
-(custom-set-variables
+;(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
- '(custom-safe-themes
-   (quote
-    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" default)))
- '(menu-bar-mode nil)
- '(package-selected-packages
-   (quote
-    (eterm-256color multi-run multi-term color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
- '(scroll-bar-mode nil)
- '(tool-bar-mode nil)
- (counsel-projectile-mode)
- '(tooltip-mode nil))
+; '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
+; '(custom-safe-themes
+;   (quote
+;    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" default)))
+; '(menu-bar-mode nil)
+; '(package-selected-packages
+;   (quote
+;    (eterm-256color multi-run multi-term color-theme-sanityinc-solarized color-theme-github color-theme-sanityinc-tomorrow cnfonts jekyll-modes exec-path-from-shell easy-jekyll counsel-projectile counsel ivy helm projectile markdown-mode+ yaml-mode dart-mode vue-mode json-mode neotree markdown-mode)))
+; '(scroll-bar-mode nil)
+; '(tool-bar-mode nil)
+; (counsel-projectile-mode)
+; '(tooltip-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ (counsel-projectile-mode)
+ '(package-selected-packages
+   (quote
+    (eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))

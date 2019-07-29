@@ -8,6 +8,26 @@
 		<array>
 			<dict>
 				<key>Action</key>
+				<string>focusSelectedNodeAction:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>IDESceneKitEditor.CmdDefinition.Controls.FocusSelectedNode</string>
+				<key>Group</key>
+				<string>Editor Menu for SceneKit Document</string>
+				<key>GroupID</key>
+				<string>IDESceneKitEditor.SceneEditorMenu</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>Controls</string>
+				<key>Title</key>
+				<string>Focus Selection</string>
+			</dict>
+			<dict>
+				<key>Action</key>
 				<string>ReleaseGPUFrame:</string>
 				<key>Alternate</key>
 				<string>NO</string>
@@ -90,7 +110,7 @@
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Title</key>
-				<string>Jump To…</string>
+				<string>Jump to…</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -112,7 +132,7 @@
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Title</key>
-				<string>Jump To…</string>
+				<string>Jump to…</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -134,7 +154,7 @@
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Title</key>
-				<string>Jump To…</string>
+				<string>Jump to…</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -156,7 +176,7 @@
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Title</key>
-				<string>Jump To…</string>
+				<string>Jump to…</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -274,7 +294,6 @@
 			<array>
 				<string>scrollPageDown:</string>
 				<string>moveToBeginningOfParagraph:</string>
-				<string>moveWordForward:</string>
 				<string>moveToEndOfParagraph:</string>
 			</array>
 			<key>^a</key>
@@ -289,6 +308,8 @@
 			<string>moveWordBackward:</string>
 			<key>~d</key>
 			<string>deleteWordForward:</string>
+			<key>~f</key>
+			<string>moveWordForward:</string>
 			<key>~v</key>
 			<string>pageUp:</string>
 		</dict>

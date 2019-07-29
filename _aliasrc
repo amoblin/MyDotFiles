@@ -1,5 +1,5 @@
 #alias .='source'
-#alias ls='ls --color'
+alias ls='ls --color'
 alias diff='colordiff -u'
 alias cp='cp -i'
 alias mv='mv -i'

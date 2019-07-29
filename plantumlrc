@@ -1,0 +1,12 @@
+skinparam {
+t1 #D5E8D4
+t2 #f98e8b
+shadowing false
+CardBackgroundColor #FFFFFF
+CloudBackgroundColor #FFFFFF
+ActorBackgroundColor #FFFFFF
+ActorBorderColor #D5E8D4
+
+'CardFontColor
+ArrowColor #50CEFB
+}
