@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "abc" > /tmp/ic.md5
+
+ic() {
+#    clear
+#    printf "\e[1;1H"
+#    imgcat $*
+    #    echo $*
+    #    feh $* &
+
+#    echo "modified"
+    newhash=`md5sum $*`
+    hash=`cat /tmp/ic.md5`
+    if [ "${newhash}" != "${hash}" ]; then
+        open $*
+        sleep 0.05
+        refresh-preview.scpt
+    fi
+    echo "${newhash}" > /tmp/ic.md5
+}
+
+export -f ic
+
+#ic test.png
+fswatch -0 $*| xargs -0 -n 1 bash -c 'ic "$@"' _

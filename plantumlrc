@@ -1,12 +1,99 @@
-skinparam {
-t1 #D5E8D4
-t2 #f98e8b
-shadowing false
-CardBackgroundColor #FFFFFF
-CloudBackgroundColor #FFFFFF
-ActorBackgroundColor #FFFFFF
-ActorBorderColor #D5E8D4
+!$c1 = "#D5E8D4"
+!$c2 = "#f98e8b"
+!$c3 = "#50CEFB"
+!$c4 = "#F8CECC"
+!$c66 = "#666666"
+!$c5 = "#FFFFFF"
+!$c6 = "#FFF2CC"
 
-'CardFontColor
-ArrowColor #50CEFB
+skinparam {
+        shadowing false
+        CardBackgroundColor $c5
+        DatabaseBackgroundColor $c5
+        FrameBorderColor $c66
+        'FrameFontColor
+        CloudBackgroundColor $c5
+        ActorBackgroundColor $c5
+        ActorBorderColor $c1
+
+        RectangleBackgroundColor $c5
+        'RectangleFontColor
+        RectangleStereotypeFontColor $c4
+        RectangleBorderThickness 0.5
+        RoundCorner 10
+        stereotypeCBackgroundColor $c4
+        ArrowColor $c3
+
+        BoxPadding 5
+        'backgroundColor $c5
+
+        'handwritten true
+        'CardFontColor
+
+        SequenceParticipantBorderThickness 1
+        SequenceCollectionsBorderThickness 1
+        ParticipantBorderColor blue
+}
+
+' 类图
+skinparam class {
+	BackgroundColor #EEEEEE
+	BorderColor #CCCCCC
+}
+
+' 活动图
+skinparam activity {
+        StartColor Green
+        EndColor Red
+        BackgroundColor $c5
+        DiamondBackgroundColor $c1
+        BarColor $c1
+        BorderThickness 1
+        BorderColor $c3
+        DiamondBorderColor $c3
+}
+
+
+skinparam participant {
+' #D5E8D4
+' #F8CECC
+' #FFF2CC
+       BackgroundColor #EEEEEE
+       BorderColor #EEEEEE
+}
+
+skinparam collections {
+       BackgroundColor #EEEEEE
+       BorderThickness 1
+       'BorderColor #EEEEEE
+}
+
+skinparam interface {
+       BackgroundColor #EEEEEE
+       BorderThickness 1
+       BorderColor $c2
+}
+
+skinparam entity {
+       BackgroundColor $c1
+       BorderThickness 1
+       BorderColor $c3
+}
+
+skinparam sequence {
+'        ArrowColor DeepSkyBlue
+'        LifeLineBorderColor blue
+'        LifeLineBackgroundColor #A9DCDF
+        ParticipantBorderColor #f98e8b
+        BoxBorderColor #FFFFFF
+        BoxBackgroundColor #EEEEEE
+'        ParticipantBackgroundColor DodgerBlue
+'        ParticipantFontSize 17
+'        ParticipantFontColor #A9DCDF
+'        ActorBackgroundColor aqua
+        ActorBorderColor #50cefb
+'        ActorFontColor DeepSkyBlue
+'        ActorFontSize 17
+'        ActorFontName Aapex
+        ParticipantBorderColor #f98e8b
 }

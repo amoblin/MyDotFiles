@@ -3,6 +3,8 @@
 
 (setq menu-bar-mode nil)
 
+(global-auto-revert-mode t)
+
 (set-default-font "Source Code Pro 24")
 
 ;; 设置第三方插件安装目录
@@ -77,23 +79,33 @@
        (height . 35))
        default-frame-alist))
 
-(setq-default cursor-type 'bar) ; 设置光标为竖线 
-;(setq-default cursor-type 'box) ; 设置光标为方块 
+(setq-default cursor-type 'bar) ; 设置光标为竖线
+;(setq-default cursor-type 'box) ; 设置光标为方块
 
 (setq org-confirm-babel-evaluate nil)
-(org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)))
 
+(add-to-list 'load-path "~/.emacs.d/elpa/ob-mermaid-20180522.1659")
+
+(setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
+;(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
+(setq ob-mermaid-cli-path (expand-file-name "~/MyDocuments/bin/mmdc.sh"))
 ;; active Org-babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(;; other Babel languages
-   (plantuml . t)))
-(setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
+   (plantuml . t)
+   (js . t)
+   (python . t)
+   (ruby . t)
+   (mermaid . t)
+   (C . t)
+))
+
 
 ;; Enable plantuml-mode for PlantUML files
 (setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\plantumlrc\\'" . plantuml-mode))
 (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
 (add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
@@ -123,7 +135,7 @@
 (set-foreground-color "white")
 
 ;(set-cursor-color "black")
-;(set-cursor-color "#ffffff") 
+;(set-cursor-color "#ffffff")
 
 ;(setq default-frame-alist
 ;   '((cursor-color . "palegoldenrod")))
@@ -151,6 +163,7 @@
 (setq linum-format "%d ")
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;; projectile
@@ -175,7 +188,7 @@
 (global-set-key (kbd "C-c d") 'insert-date)
 
 ;; Emacs Shell Mode
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 
 
@@ -240,10 +253,15 @@
 ;; zsh
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
+
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+   (lambda () (rainbow-mode t)))
+(my-global-rainbow-mode t)
+
 ;; Org-Mode
 ;(require 'ox-gfm)
 ;(setq org-hide-leading-stars t)
-;(setq org-log-done 'time)
+(setq org-log-done 'time)
 ;(define-key global-map "\C-ca" 'org-agenda)
 ;(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 ;(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
@@ -269,7 +287,7 @@
 ;(require 'ox-reveal)
 
 ;; Swift Mode
-;(require 'swift-mode) 
+;(require 'swift-mode)
 
 ;; Markdown Mode
 (add-to-list 'load-path "~/.emacs.d/dev-repo/markdown-mode")
