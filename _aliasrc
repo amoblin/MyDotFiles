@@ -7,6 +7,8 @@ alias rm='rmtrash'
 alias be='bundle exec'
 #alias rm='rm -i'
 
+alias sss="ruby -run -ehttpd . -p8000"
+
 export ALTERNATE_EDITOR=""
 
 if [ -n "$INSIDE_EMACS" ]; then
