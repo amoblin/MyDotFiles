@@ -1,6 +1,12 @@
 *~
-node_modules/
 .DS_Store
+
+node_modules/
+
 *.pyc
+
+Pods/
+*.xcworkspace/
 xcshareddata/
+
 *.bak

@@ -13,12 +13,12 @@ confs=$confs"  _vimrc _screenrc _xvimrc"
 #confs=$confs"  "
 
 for conf in $confs; do
-    dist=`echo $conf|sed 's/_/./'`
-    if [ -s "$HOME/$dist" ]; then
+    dist=~/`echo $conf|sed 's/_/./'`
+    if [ -s "$dist" ]; then
         echo "ignore " $dist
     else
-        echo $conf -> $dist;
-        ln -sf `pwd`/$conf $HOME/$dist
+        echo $conf -\> $dist;
+        ln -sf `pwd`/$conf $dist
     fi
 done
 

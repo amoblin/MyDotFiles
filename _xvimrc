@@ -1,3 +1,5 @@
+set debug
+
 set number
 "set hlsearch
 set guioptions=r
@@ -9,7 +11,7 @@ set wrapscan
 map gb :xccmd goBackInHistoryByCommand<CR>
 map gf :xccmd goForwardInHistoryByCommand<CR>
 
-map ,n :xccmd jumpToNextCounterpart<CR>  
+map ,n :xccmd jumpToNextCounterpart<CR>
 
 " Break "
 map ,bp :xccmd toggleBreakpointAtCurrentLine<CR>

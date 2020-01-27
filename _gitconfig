@@ -1,12 +1,28 @@
-[user]
-    name = amoblin@mbp
-    email = amoblin@gmail.com
+[include]
+    path = ~/.gitcustom
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    au = add -u
+    diffc = diff --cached -C --color-words=.
+    dcw = diff --color-words=.
+    ds = diff --stat
+    cdiff = diff --color-words
+    desc = describe
+    lo = log --pretty=oneline
+    lg = log --graph --decorate --color-words=.
+    lp = log -p
+    ln = log --name-status
+    ld = log --decorate --graph
 [color]
     ui = auto
+    diff = always
 [core]
-#    editor = emacsclient -t
-    editor = e
+    editor = emacsclient -t
 #    editor = vim
+    ignore = pyc
     excludesfile = ~/.gitignore
     quotepath = false
 [push]
@@ -35,9 +51,10 @@
 #    template = /Users/amoblin/.stCommitMsg
 [gpg]
     program = gpg2
+
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path = 
+    path =
 [mergetool "sourcetree"]
-     cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-     trustExitCode = true
+    cmd = ~/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
