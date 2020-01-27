@@ -6,6 +6,10 @@
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 
+;; 隐藏工具栏
+;(tool-bar-mode -1)
+
+;; 禁用menubar
 (setq menu-bar-mode nil)
 
 (global-auto-revert-mode t)
@@ -15,8 +19,17 @@
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
+;; 禁用滚动条
+;(scroll-bar-mode -1)
+
+;; kill buffer without confirm
+(global-set-key [(control x) (k)] 'kill-this-buffer)
+
 ;; No Tabs
 (setq-default indent-tabs-mode nil)
+
+;; 自动折行
+(toggle-truncate-lines 1)
 
 ;; 不提示软连接到Git仓库里的文件
 (setq vc-follow-symlinks nil)
@@ -72,9 +85,6 @@
              (local-set-key (kbd "C-c u") (kbd "C-c C-u C-c h C-c h"))
              (csv-header-line)
              ))
-
-;; kill buffer without confirm
-(global-set-key [(control x) (k)] 'kill-this-buffer)
 
 (setq default-frame-alist
     (append
@@ -163,7 +173,6 @@
 
 ;; 显示行号
 (global-linum-mode t)
-
 (setq linum-format "%d ")
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
@@ -185,6 +194,29 @@
 ;; Emacs Shell Mode
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
+
+(defun nolinum ()
+  (global-linum-mode 0)
+)
+;;(add-hook 'shell-mode-hook 'nolinum)
+
+;;开启dot画图
+(defvar org-list-allow-alphabetical t)
+(defun  org-element-bold-successor           (arg))
+(defun  org-element-code-successor           (arg))
+(defun  org-element-entity-successor         (arg))
+(defun  org-element-italic-successor         (arg))
+(defun  org-element-latex-fragment-successor (arg))
+(defun  org-element-strike-through-successor (arg))
+(defun  org-element-subscript-successor      (arg))
+(defun  org-element-superscript-successor    (arg))
+(defun  org-element-underline-successor      (arg))
+(defun  org-element-verbatim-successor       (arg))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)))
+
 
 
 (require 'package)
@@ -215,6 +247,10 @@
 ;; fix find file bug
 ;(setq projectile-git-submodule-command nil)
 ;(setq projectile-enable-caching t)
+
+;; Projectile
+;(require 'projectile)
+;(projectile-global-mode)
 
 ;; python dev
 (require 'elpy)
@@ -284,8 +320,10 @@
 ;(setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 ;(define-key global-map "\C-ca" 'org-agenda)
-;(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-;(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+;; org mode默认遇到中文不自动换行，中文换行问题
+;(add-hook 'org-mode-hook
+	  (lambda () (setq truncate-lines nil)))
+;;(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 ;; org中源码高亮显示
 ;(setq org-src-fontify-natively t)
 ;; 导出html时源码高亮显示
@@ -428,6 +466,12 @@
 
 ;; 字体和编码
 ;; 设置英文字体
+(if (display-graphic-p)
+(set-face-attribute 'default nil :font "Menlo 14" :height 140))
+(if (display-graphic-p)
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+       charset (font-spec :family "Heiti_SC" :size 14))))
 
 ;; UTF-8 settings
 (set-language-environment 'UTF-8)
@@ -463,6 +507,33 @@
 ;(setq evil-default-state 'emacs)
 ;(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
 ;(custom-set-variables
+
+
+;(defvar myPackages
+;  '(better-defaults
+;    ein
+;    elpy
+;    flycheck
+;    material-theme
+;    py-autopep8))
+
+;(mapc #'(lambda (package)
+;    (unless (package-installed-p package)
+;      (package-install package)))
+;      myPackages)
+
+;(elpy-enable)
+;(elpy-use-ipython)
+
+;; use flycheck not flymake with elpy
+;(when (require 'flycheck nil t)
+;  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;  (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+;; enable autopep8 formatting on save
+;(require 'py-autopep8)
+;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
