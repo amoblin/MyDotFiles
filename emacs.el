@@ -1,3 +1,8 @@
+;;
+; 启动报错：Emacs-x86_64-10_14[76147:86409916] Failed to initialize color list unarchiver: Error Domain=NSCocoaErrorDomain Code=4864 "*** -[NSKeyedUnarchiver _initForReadingFromData:error:throwLegacyExceptions:]: non-keyed archive cannot be decoded by NSKeyedUnarchiver" UserInfo={NSDebugDescription=*** -[NSKeyedUnarchiver _initForReadingFromData:error:throwLegacyExceptions:]: non-keyed archive cannot be decoded by NSKeyedUnarchiver}
+; 删除 ~/Library/Colors/Emacs.clr 即可
+
+
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 
@@ -101,7 +106,6 @@
    (C . t)
 ))
 
-
 ;; Enable plantuml-mode for PlantUML files
 (setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
@@ -166,15 +170,6 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-;; projectile
-
-;; fix find file bug
-(setq projectile-git-submodule-command nil)
-
-(setq projectile-enable-caching t)
-(setq projectile-keymap-prefix (kbd "C-c p"))
-
-
 (defun insert-date (prefix)
   "Insert the current date. With prefix-argument, use ISO format. With
    two prefix arguments, write out the day and month name."
@@ -201,9 +196,32 @@
                          ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
+
 ;; auto update package list
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+;; projectile
+
+(use-package projectile
+   :ensure t
+   :config
+       (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (counsel-projectile-mode)
+;       (require 'helm-projectile)
+;       (helm-projectile-on)
+       (projectile-mode +1))
+;; fix find file bug
+;(setq projectile-git-submodule-command nil)
+;(setq projectile-enable-caching t)
+
+;; python dev
+(require 'elpy)
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
 
 ;;
 (require 'all-the-icons)
@@ -213,6 +231,9 @@
 ;;  :after
 ;;  ;; Load the above patches
 ;;  )
+
+;; json lint
+(require 'flycheck-demjsonlint)
 
 (setq inhibit-compacting-font-caches t)
 ;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -411,16 +432,29 @@
 ;; UTF-8 settings
 (set-language-environment 'UTF-8)
 (set-locale-environment "UTF-8")
-(set-language-environment "UTF-8")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-clipboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (modify-coding-system-alist 'process "*" 'utf-8)
-(setq default-process-coding-system
-      '(chinese-gbk . chinese-gbk))
-(setq-default pathname-coding-system 'chinese-gbk)
+;(setq default-process-coding-system
+;      '(chinese-gbk . chinese-gbk))
+;(setq-default pathname-coding-system 'chinese-gbk)
+
+(set-default-coding-systems 'utf-8)
+(set-file-name-coding-system 'utf-8-unix)
+(set-next-selection-coding-system 'utf-8-unix)
+(setq locale-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(prefer-coding-system 'cp950)
+(prefer-coding-system 'gb2312)
+(prefer-coding-system 'cp936)
+(prefer-coding-system 'gb18030)
+(prefer-coding-system 'utf-16)
+(prefer-coding-system 'utf-8-dos)
+(prefer-coding-system 'utf-8-unix)
+
 
 ;; evil
 ;(add-to-list 'load-path "~/.emacs.d/evil")
@@ -456,7 +490,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- (counsel-projectile-mode)
  '(package-selected-packages
    (quote
-    (eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
