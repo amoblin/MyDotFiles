@@ -64,28 +64,6 @@
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 ;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
-;(when (fboundp 'csv-mode)
-
-;  (defun my-config ()
-;    "For use in `csv-mode-hook'."
-;    (local-set-key (kbd "tab") 'csv-forward-field)
-;    (local-set-key (kbd "S-TAB") 'csv-backward-field)
-;    ;; more stuff here
-;    )
-
-;  (add-hook 'csv-mode-hook 'my-config)
-;  )
-
-(add-hook 'csv-mode-hook ;; guessing
-          '(lambda ()
-             (local-set-key (kbd "TAB") 'csv-forward-field)
-             (local-set-key (kbd "<backtab>") 'csv-backward-field)
-             (local-set-key (kbd "C-c h") 'csv-header-line)
-             (local-set-key (kbd "C-c a") (kbd "C-c C-a C-c h C-c h"))
-             (local-set-key (kbd "C-c u") (kbd "C-c C-u C-c h C-c h"))
-             (csv-header-line)
-             ))
-
 (setq default-frame-alist
     (append
     '( (top . 310)
@@ -96,34 +74,6 @@
 
 (setq-default cursor-type 'bar) ; 设置光标为竖线
 ;(setq-default cursor-type 'box) ; 设置光标为方块
-
-(setq org-confirm-babel-evaluate nil)
-
-(add-to-list 'load-path "~/.emacs.d/elpa/ob-mermaid-20180522.1659")
-
-(setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
-;(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
-(setq ob-mermaid-cli-path (expand-file-name "~/MyDocuments/bin/mmdc.sh"))
-;; active Org-babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(;; other Babel languages
-   (plantuml . t)
-   (js . t)
-   (python . t)
-   (ruby . t)
-   (mermaid . t)
-   (C . t)
-))
-
-;; Enable plantuml-mode for PlantUML files
-(setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\plantumlrc\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
-(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-
 
 ;; 启动时全屏
 (defun fullscreen (&optional f)
@@ -200,6 +150,22 @@
 )
 ;;(add-hook 'shell-mode-hook 'nolinum)
 
+
+(define-skeleton c-throwaway
+  "Throwaway C skeleton"
+  nil
+  "#include <stdio.h>\n"
+  "#include <stdlib.h>\n"
+  "\n"
+  "int main(void){\n"
+  "\n"
+  "}\n")
+
+
+
+
+
+
 ;;开启dot画图
 (defvar org-list-allow-alphabetical t)
 (defun  org-element-bold-successor           (arg))
@@ -251,6 +217,30 @@
 ;; Projectile
 ;(require 'projectile)
 ;(projectile-global-mode)
+
+
+;; CSV config
+;(when (fboundp 'csv-mode)
+
+;  (defun my-config ()
+;    "For use in `csv-mode-hook'."
+;    (local-set-key (kbd "tab") 'csv-forward-field)
+;    (local-set-key (kbd "S-TAB") 'csv-backward-field)
+;    ;; more stuff here
+;    )
+
+;  (add-hook 'csv-mode-hook 'my-config)
+;  )
+
+(add-hook 'csv-mode-hook ;; guessing
+          '(lambda ()
+             (local-set-key (kbd "TAB") 'csv-forward-field)
+             (local-set-key (kbd "<backtab>") 'csv-backward-field)
+             (local-set-key (kbd "C-c h") 'csv-header-line)
+             (local-set-key (kbd "C-c a") (kbd "C-c C-a C-c h C-c h"))
+             (local-set-key (kbd "C-c u") (kbd "C-c C-u C-c h C-c h"))
+             (csv-header-line)
+             ))
 
 ;; python dev
 (require 'elpy)
@@ -322,7 +312,7 @@
 ;(define-key global-map "\C-ca" 'org-agenda)
 ;; org mode默认遇到中文不自动换行，中文换行问题
 ;(add-hook 'org-mode-hook
-	  (lambda () (setq truncate-lines nil)))
+;	  (lambda () (setq truncate-lines nil)))
 ;;(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 ;; org中源码高亮显示
 ;(setq org-src-fontify-natively t)
@@ -331,6 +321,37 @@
 ;; 导出markdown
 ;(eval-after-load "org"
 ;  '(require 'ox-md nil t))
+
+
+(setq org-confirm-babel-evaluate nil)
+
+(add-to-list 'load-path "~/.emacs.d/elpa/ob-mermaid-20180522.1659")
+
+(setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
+;(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
+(setq ob-mermaid-cli-path (expand-file-name "~/MyDocuments/bin/mmdc.sh"))
+;; active Org-babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(;; other Babel languages
+   (plantuml . t)
+   (js . t)
+   (python . t)
+   (ruby . t)
+   (mermaid . t)
+   (C . t)
+))
+
+
+;; Enable plantuml-mode for PlantUML files
+(setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\plantumlrc\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
+
 
 ;; Golang
 ;(require 'go-mode)
