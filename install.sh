@@ -7,32 +7,37 @@
 #ln amoblin.zsh ~/.oh-my-zsh/custom
 #ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
-confs="_aliasrc _gitconfig _gitignore _pryrc _tigrc _tmux.conf _zshrc"
-confs=$confs"  _vimrc _screenrc _xvimrc"
-#confs=$confs"  "
-#confs=$confs"  "
+confs=(
+    _aliasrc
+    _gitconfig
+    _gitignore
+    _pryrc
+    _tigrc
+    _tmux.conf
+    _zshrc
+    _vimrc
+    _screenrc
+    _xvimrc
+)
 
-for conf in $confs; do
+for conf in ${confs[@]}; do
     dist=~/`echo $conf|sed 's/_/./'`
-    if [ -s "$dist" ]; then
-        echo "ignore " $dist
-    else
-        echo $conf -\> $dist;
-        ln -sf `pwd`/$conf $dist
-    fi
+    [ -s "$dist" ] && echo "ignore " $dist || (echo $conf -\> $dist; ln -sf `pwd`/$conf $dist)
 done
 
-dists=".config/karabiner/karabiner.json"
-dists=$dists" "
+dists=(
+    ~/.config/karabiner/karabiner.json
+    ~/Library/Developer/Xcode/UserData/KeyBindings/Emacs.idekeybindings
+)
 
 for dist in $dists; do
     conf=`basename $dist`
-    [ -s "$HOME/$dist" ] || (echo $conf $dist; ln -sf `pwd`/$conf $HOME/$dist)
+    [ -s "$dist" ] && echo "ignore " $dist || (echo $conf -\> $dist; ln -sf `pwd`/$conf $dist)
 done
 
 conf="emacs.el"
-dist=".emacs.d/init.el"
-[ -s "$HOME/$dist" ] || (echo $conf $dist; ln -sf `pwd`/emacs.el $HOME/$dist)
+dist=~/.emacs.d/init.el
+[ -s "$dist" ] && echo "ignore " $dist || (echo $conf -\> $dist; ln -sf `pwd`/emacs.el $dist)
 
 exit
 
