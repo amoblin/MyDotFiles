@@ -14,7 +14,12 @@ confs=$confs"  _vimrc _screenrc _xvimrc"
 
 for conf in $confs; do
     dist=`echo $conf|sed 's/_/./'`
-    [ -s "$HOME/$dist" ] || echo $conf $dist; ln -sf `pwd`/$conf $HOME/$dist
+    if [ -s "$HOME/$dist" ]; then
+        echo "ignore " $dist
+    else
+        echo $conf -> $dist;
+        ln -sf `pwd`/$conf $HOME/$dist
+    fi
 done
 
 dists=".config/karabiner/karabiner.json"
@@ -22,12 +27,12 @@ dists=$dists" "
 
 for dist in $dists; do
     conf=`basename $dist`
-    [ -s "$HOME/$dist" ] || echo $conf $dist; ln -sf `pwd`/$conf $HOME/$dist
+    [ -s "$HOME/$dist" ] || (echo $conf $dist; ln -sf `pwd`/$conf $HOME/$dist)
 done
 
 conf="emacs.el"
 dist=".emacs.d/init.el"
-[ -s "$HOME/$dist" ] || echo $conf $dist; ln -sf `pwd`/emacs.el $HOME/$dist
+[ -s "$HOME/$dist" ] || (echo $conf $dist; ln -sf `pwd`/emacs.el $HOME/$dist)
 
 exit
 
