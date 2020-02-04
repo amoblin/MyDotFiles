@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Header File
+# key: Header
+# --
+
+#include <stdio.h>

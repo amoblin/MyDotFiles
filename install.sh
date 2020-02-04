@@ -35,9 +35,13 @@ for dist in $dists; do
     [ -s "$dist" ] && echo "ignore " $dist || (echo $conf -\> $dist; ln -sf `pwd`/$conf $dist)
 done
 
-conf="emacs.el"
-dist=~/.emacs.d/init.el
-[ -s "$dist" ] && echo "ignore " $dist || (echo $conf -\> $dist; ln -sf `pwd`/emacs.el $dist)
+emacs=`pwd`/"emacs"
+dist=~/.emacs.d
+
+for item in ${emacs}/*; do
+    d=$dist/`basename $item`
+    [ -s "$d" ] && echo "ignore " $item || (echo $item -\> $d; ln -sf $item $d)
+done
 
 exit
 
@@ -80,4 +84,3 @@ exit
 #virtualbox
 
 #vim-full
-
