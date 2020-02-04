@@ -151,21 +151,6 @@
 ;;(add-hook 'shell-mode-hook 'nolinum)
 
 
-(define-skeleton c-throwaway
-  "Throwaway C skeleton"
-  nil
-  "#include <stdio.h>\n"
-  "#include <stdlib.h>\n"
-  "\n"
-  "int main(void){\n"
-  "\n"
-  "}\n")
-
-
-
-
-
-
 ;;开启dot画图
 (defvar org-list-allow-alphabetical t)
 (defun  org-element-bold-successor           (arg))
@@ -218,6 +203,31 @@
 ;(require 'projectile)
 ;(projectile-global-mode)
 
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1)
+  :config
+  (add-to-list 'yas-snippet-dirs (locate-user-emacs-file "snippets")))
+
+(defun my/autoinsert-yas-expand()
+  "Replace text in yasnippet template."
+  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
+
+(use-package autoinsert
+  :init
+  ;; Don't want to be prompted before insertion:
+  (setq auto-insert-query nil)
+
+  (setq auto-insert-directory (locate-user-emacs-file "templates"))
+  (add-hook 'find-file-hook 'auto-insert)
+  (auto-insert-mode 1)
+
+  :config
+  (define-auto-insert "\\.el$" ["template.el" my/autoinsert-yas-expand])
+	(define-auto-insert "\\.c$" ["template.c" my/autoinsert-yas-expand])
+	(define-auto-insert "\\.org" ["template.org" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.html?$" ["default-html.html" my/autoinsert-yas-expand]))
 
 ;; CSV config
 ;(when (fboundp 'csv-mode)
