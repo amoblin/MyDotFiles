@@ -7,23 +7,10 @@
 #ln amoblin.zsh ~/.oh-my-zsh/custom
 #ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
-confs=(
-    _aliasrc
-    _gitconfig
-    _gitignore
-    _pryrc
-    _tigrc
-    _tmux.conf
-    _profile
-    _zshrc
-    _vimrc
-    _screenrc
-    _xvimrc
-)
-
-for conf in ${confs[@]}; do
-    dist=~/`echo $conf|sed 's/_/./'`
-    [ -s "$dist" ] && echo "ignore " $dist || (echo $conf -\> $dist; ln -sf `pwd`/$conf $dist)
+for conf in `pwd`/home_dot_files/*; do
+    c=`basename $conf`
+    dist=~/`echo $c|sed 's/_/./'`
+    [ -s "$dist" ] && echo "ignore " $c || (echo $c -\> $dist; ln -sf $conf $dist)
 done
 
 dists=(
