@@ -14,6 +14,7 @@ confs=(
     _pryrc
     _tigrc
     _tmux.conf
+    _profile
     _zshrc
     _vimrc
     _screenrc

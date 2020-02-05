@@ -445,10 +445,11 @@
 
 ;(add-hook 'ruby-mode-hook #'lsp)
 
-(when (featurep 'cocoa)
-  ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+;(when (featurep 'cocoa)
+;  ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
+;  (require 'exec-path-from-shell)
+;  (exec-path-from-shell-initialize))
+
 ;(require 'company-lsp)
 ;(push 'company-lsp company-backends)
 
@@ -462,12 +463,12 @@
 ;                         #'projectile-project-root
 ;                         '("solargraph socket"))
 
-(defun copy-shell-environment-variables ()
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
-(copy-shell-environment-variables)
-(setenv "VISUAL" "emacsclient")
-(setenv "EDITOR" (getenv "VISUAL"))
+;(defun copy-shell-environment-variables ()
+;  (when (memq window-system '(mac ns))
+;    (exec-path-from-shell-initialize)))
+;(copy-shell-environment-variables)
+;(setenv "VISUAL" "emacsclient")
+;(setenv "EDITOR" (getenv "VISUAL"))
 
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (setq rspec-use-rvm t)
@@ -571,7 +572,7 @@
 ;; enable autopep8 formatting on save
 ;(require 'py-autopep8)
 ;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-(custom-set-variables
+;(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
