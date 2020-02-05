@@ -327,9 +327,9 @@
 ;(setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 ;(define-key global-map "\C-ca" 'org-agenda)
-;; org mode默认遇到中文不自动换行，中文换行问题
-;(add-hook 'org-mode-hook
-;	  (lambda () (setq truncate-lines nil)))
+; org mode默认遇到中文不自动换行，中文换行问题
+(add-hook 'org-mode-hook
+	  (lambda () (setq truncate-lines nil)))
 ;;(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 ;; org中源码高亮显示
 ;(setq org-src-fontify-natively t)
