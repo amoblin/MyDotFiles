@@ -224,10 +224,17 @@
   (auto-insert-mode 1)
 
   :config
-  (define-auto-insert "\\.el$" ["template.el" my/autoinsert-yas-expand])
-	(define-auto-insert "\\.c$" ["template.c" my/autoinsert-yas-expand])
-	(define-auto-insert "\\.org" ["template.org" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.html?$" ["default-html.html" my/autoinsert-yas-expand]))
+  (define-auto-insert "\\.el$" ["elisp.el" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.c$" ["c.c" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.org$" ["org-mode.org" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.py$" ["python.py" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.js$" ["node.js" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.rb$" ["ruby.rb" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.md$" ["markdown.rb" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.sh$" ["shell.sh" my/autoinsert-yas-expand])
+  (define-auto-insert "Makefile$" ["Makefile" my/autoinsert-yas-expand])
+  (define-auto-insert "Rakefile$" ["Rakefile" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.html?$" ["html.html" my/autoinsert-yas-expand]))
 
 ;; CSV config
 ;(when (fboundp 'csv-mode)
