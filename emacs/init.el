@@ -6,11 +6,14 @@
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 
+; GUI配置
 ;; 隐藏工具栏
-;(tool-bar-mode -1)
-
+(tool-bar-mode -1)
+;; 禁用滚动条
+(scroll-bar-mode -1)
 ;; 禁用menubar
 (setq menu-bar-mode nil)
+
 
 (global-auto-revert-mode t)
 
@@ -18,9 +21,6 @@
 
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
-
-;; 禁用滚动条
-;(scroll-bar-mode -1)
 
 ;; kill buffer without confirm
 (global-set-key [(control x) (k)] 'kill-this-buffer)
@@ -30,6 +30,10 @@
 
 ;; 自动折行
 (toggle-truncate-lines 1)
+
+;; 记住光标位置
+(require 'saveplace)
+(save-place-mode)
 
 ;; 不提示软连接到Git仓库里的文件
 (setq vc-follow-symlinks nil)
@@ -235,6 +239,10 @@
   (define-auto-insert "Makefile$" ["Makefile" my/autoinsert-yas-expand])
   (define-auto-insert "Rakefile$" ["Rakefile" my/autoinsert-yas-expand])
   (define-auto-insert "\\.html?$" ["html.html" my/autoinsert-yas-expand]))
+
+(use-package makefile-executor
+  :config
+  (add-hook 'makefile-mode-hook 'makefile-executor-mode))
 
 ;; CSV config
 ;(when (fboundp 'csv-mode)
@@ -463,12 +471,12 @@
 ;                         #'projectile-project-root
 ;                         '("solargraph socket"))
 
-;(defun copy-shell-environment-variables ()
-;  (when (memq window-system '(mac ns))
-;    (exec-path-from-shell-initialize)))
-;(copy-shell-environment-variables)
-;(setenv "VISUAL" "emacsclient")
-;(setenv "EDITOR" (getenv "VISUAL"))
+(defun copy-shell-environment-variables ()
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+(copy-shell-environment-variables)
+(setenv "VISUAL" "emacsclient")
+(setenv "EDITOR" (getenv "VISUAL"))
 
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (setq rspec-use-rvm t)
@@ -602,4 +610,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
