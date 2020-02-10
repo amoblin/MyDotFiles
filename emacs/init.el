@@ -7,13 +7,7 @@
 (setq inhibit-startup-screen t)
 
 ;; 启动时全屏
-(defun fullscreen (&optional f)
-  (interactive)
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-  )
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ; GUI配置
 ;; 隐藏工具栏
@@ -57,10 +51,6 @@
   scroll-conservatively 10000
   scroll-preserve-screen-position 1)
 
-;设置启动窗口位置大小
-;也可以配置REG文件来实现(更高效)
-;[HKEY_LOCAL_MACHINE\SOFTWARE\GNU\Emacs]
-;"Emacs.Geometry"="100x30+240+70"
 
 ;; shortcut keybinding
 
@@ -99,9 +89,20 @@
 ;;(color-theme-tty-dark)
 ;;(color-theme-sanityinc-tomorrow)
 
-;; 背景颜色
-(set-background-color "black")
-(set-foreground-color "white")
+
+(defun my-set-background-color (&optional frame)
+  "Set custom background color."
+  (with-selected-frame (or frame (selected-frame))
+    ;; 背景颜色
+    (set-background-color "black")
+    (set-foreground-color "white")
+;    (set-background-color "honeydew2")
+    )
+  )
+
+(add-hook 'after-make-frame-functions 'my-set-background-color)
+
+(my-set-background-color)
 
 ;(set-cursor-color "black")
 ;(set-cursor-color "#ffffff")
