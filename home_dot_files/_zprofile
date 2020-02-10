@@ -15,13 +15,13 @@ export PATH=$PATH:$JAVA_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tool
 
 export NVM_DIR="$HOME/.nvm"
 
-source $HOME/.cargo/env
 export ENABLE_FLUTTER_DESKTOP=true
 
 [ -s "$HOME/.customrc" ] && \. "$HOME/.customrc"
 
+#source $HOME/.cargo/env
 # Add RBENV init hook
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 source ~/.aliasrc
 
