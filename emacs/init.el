@@ -6,6 +6,15 @@
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 
+;; 启动时全屏
+(defun fullscreen (&optional f)
+  (interactive)
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+  )
+
 ; GUI配置
 ;; 隐藏工具栏
 (tool-bar-mode -1)
@@ -63,7 +72,6 @@
 
 (global-unset-key (kbd "C-x C-c"))
 (global-set-key (kbd "C-x C-c") 'kill-this-buffer)
-(global-set-key (kbd "C-x t") 'multi-term)
 (global-set-key (kbd "C-x d") 'neotree-toggle)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 ;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
@@ -79,13 +87,6 @@
 (setq-default cursor-type 'bar) ; 设置光标为竖线
 ;(setq-default cursor-type 'box) ; 设置光标为方块
 
-;; 启动时全屏
-(defun fullscreen (&optional f)
-  (interactive)
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -109,7 +110,7 @@
 ;   '((cursor-color . "palegoldenrod")))
 
 ;; 当前行高亮
-(global-hl-line-mode 1)
+(global-hl-line-mode t)
 ;(set-face-background 'hl-line "#efefef")
 (set-face-background 'hl-line "#333333")
 (set-face-foreground 'highlight nil)
@@ -128,9 +129,12 @@
 ;; 显示行号
 (global-linum-mode t)
 (setq linum-format "%d ")
+
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; 保存文件时删除空白符
+;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 (defun insert-date (prefix)
@@ -147,32 +151,28 @@
 
 ;; Emacs Shell Mode
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 
-(defun nolinum ()
-  (global-linum-mode 0)
-)
-;;(add-hook 'shell-mode-hook 'nolinum)
+;; multi-term.el
+;(require 'multi-term)
+;(setq multi-term-program "/bin/bash")
+;(setq multi-term-program "/bin/zsh")
+;(global-set-key (kbd "C-c z") (quote multi-term))
 
+(global-set-key (kbd "C-x t") 'multi-term)
 
-;;开启dot画图
-(defvar org-list-allow-alphabetical t)
-(defun  org-element-bold-successor           (arg))
-(defun  org-element-code-successor           (arg))
-(defun  org-element-entity-successor         (arg))
-(defun  org-element-italic-successor         (arg))
-(defun  org-element-latex-fragment-successor (arg))
-(defun  org-element-strike-through-successor (arg))
-(defun  org-element-subscript-successor      (arg))
-(defun  org-element-superscript-successor    (arg))
-(defun  org-element-underline-successor      (arg))
-(defun  org-element-verbatim-successor       (arg))
+(defun shell-mode-config ()
+    (set (make-local-variable 'scroll-margin) 0)
+    (linum-mode -1)
+    (setq mode-line-format nil)
+    (hl-line-mode nil)
+    (face-remap-add-relative
+     'hl-line '((:background "#000000") hl-line))
+;    (ansi-color-for-comint-mode-on t)
+    )
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((dot . t)))
-
-
+(add-hook 'term-mode-hook 'shell-mode-config)
+(add-hook 'shell-mode-hook 'shell-mode-config)
+(add-hook 'eshell-mode-hook 'shell-mode-config)
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -298,12 +298,6 @@
 ;(require 'dockerfile-mode)
 ;(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
-;; multi-term.el
-;(require 'multi-term)
-;(setq multi-term-program "/bin/bash")
-;(setq multi-term-program "/bin/zsh")
-;(global-set-key (kbd "C-c z") (quote multi-term))
-
 
 ;; tabbar mode
 ;(require 'tabbar)
@@ -376,6 +370,22 @@
 (add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
+;;开启dot画图
+(defvar org-list-allow-alphabetical t)
+(defun  org-element-bold-successor           (arg))
+(defun  org-element-code-successor           (arg))
+(defun  org-element-entity-successor         (arg))
+(defun  org-element-italic-successor         (arg))
+(defun  org-element-latex-fragment-successor (arg))
+(defun  org-element-strike-through-successor (arg))
+(defun  org-element-subscript-successor      (arg))
+(defun  org-element-superscript-successor    (arg))
+(defun  org-element-underline-successor      (arg))
+(defun  org-element-verbatim-successor       (arg))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)))
 
 
 ;; Golang
