@@ -19,10 +19,12 @@ export ENABLE_FLUTTER_DESKTOP=true
 
 [ -s "$HOME/.customrc" ] && \. "$HOME/.customrc"
 
-#source $HOME/.cargo/env
+[ -f ~/.cargo/env ] && source $HOME/.cargo/env
 # Add RBENV init hook
 #eval "$(rbenv init -)"
 
 source ~/.aliasrc
 
 #export EDITOR="emacs"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
