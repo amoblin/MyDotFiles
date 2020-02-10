@@ -1,8 +1,8 @@
-#+TITLE: `(buffer-name)`
+#+TITLE: `(file-name-sans-extension (buffer-name))`
 #+AUTHOR: amoblin
 #+EMAIL: <amoblin@gmail.com>
 #+DATE: <`(format-time-string "%Y-%m-%d %a %H:%M")`>
 #+TODO: TODO(t) DOING(i!) | DONE(d)
 #+OPTIONS: ^:{}
 
-* `(buffer-name)`
+* `(file-name-sans-extension (buffer-name))`

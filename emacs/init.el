@@ -533,6 +533,9 @@
 ;      '(chinese-gbk . chinese-gbk))
 ;(setq-default pathname-coding-system 'chinese-gbk)
 
+; 修复eshell中git log中文乱码 https://answer-id.com/52923551
+(setenv "LANG" "en_US.UTF-8")
+
 (set-default-coding-systems 'utf-8)
 (set-file-name-coding-system 'utf-8-unix)
 (set-next-selection-coding-system 'utf-8-unix)
