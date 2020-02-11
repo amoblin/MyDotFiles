@@ -4,7 +4,7 @@
 
 
 ;; 禁用启动画面
-;(setq inhibit-startup-screen t)
+(setq inhibit-startup-screen t)
 
 ;; 启动时全屏
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -161,6 +161,22 @@
 (global-set-key (kbd "C-c f") 'treemacs)
 (global-set-key (kbd "C-c n") 'neotree-toggle)
 (global-set-key (kbd "C-c d") 'insert-date)
+
+(defun tree-conf ()
+  (local-set-key (kbd "s") 'multi-term)
+  (local-set-key (kbd "x") 'multi-term)
+  (local-set-key (kbd "j") (kbd "n"))
+  (local-set-key (kbd "k") (kbd "p"))
+  (local-set-key (kbd "l") (kbd "TAB"))
+  )
+
+(add-hook 'treemacs-mode-hook 'tree-conf)
+(add-hook 'neotree-mode-hook
+          '(lambda ()
+             (tree-conf)
+             (local-set-key (kbd "u") (kbd "U"))
+             )
+          )
 
 (defun shell-mode-config ()
     (set (make-local-variable 'scroll-margin) 0)
