@@ -7,6 +7,10 @@
 #ln amoblin.zsh ~/.oh-my-zsh/custom
 #ln amoblin.zsh-theme ~/.oh-my-zsh/theme
 
+item=`pwd`/bin
+dist=~/bin
+[ -s $dist ] && echo igonre "bin" || (echo $item -\> $dist; ln -sf $item $dist)
+
 for conf in `pwd`/home_dot_files/*; do
     c=`basename $conf`
     dist=~/`echo $c|sed 's/_/./'`

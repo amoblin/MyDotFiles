@@ -52,6 +52,21 @@
   scroll-preserve-screen-position 1)
 
 
+(defun window-split-toggle ()
+  "Toggle between horizontal and vertical split with two windows."
+  (interactive)
+  (if (> (length (window-list)) 3)
+      (error "Can't toggle with more than 3 windows!")
+    (let ((func (if (window-full-height-p)
+                    #'split-window-vertically
+                  #'split-window-horizontally)))
+      (delete-other-windows)
+      (funcall func)
+      (save-selected-window
+        (other-window 1)
+        (switch-to-buffer (other-buffer))))))
+
+
 ;; shortcut keybinding
 
 ;;(normal-erase-is-backspace-mode 1)
@@ -157,14 +172,26 @@
 ;(setq multi-term-program "/bin/zsh")
 ;(global-set-key (kbd "C-c z") (quote multi-term))
 
-(global-set-key (kbd "C-c t") 'multi-term)
+(defun am-open-terminal ()
+  "Open a `shell' in a new window."
+  (interactive)
+  (let ((buf (multi-term)))
+    (switch-to-buffer (buf))
+    ))
+
+(global-set-key (kbd "C-c SPC") 'window-split-toggle)
+(global-set-key (kbd "C-c x") 'am-open-terminal)
 (global-set-key (kbd "C-c f") 'treemacs)
 (global-set-key (kbd "C-c n") 'neotree-toggle)
 (global-set-key (kbd "C-c d") 'insert-date)
+(global-set-key (kbd "C-c h") 'windmove-left)
+(global-set-key (kbd "C-c l") 'windmove-right)
+(global-set-key (kbd "C-c j") 'windmove-down)
+(global-set-key (kbd "C-c k") 'windmove-up)
 
 (defun tree-conf ()
-  (local-set-key (kbd "s") 'multi-term)
-  (local-set-key (kbd "x") 'multi-term)
+  (local-set-key (kbd "s") 'am-open-terminal)
+  (local-set-key (kbd "x") 'am-open-terminal)
   (local-set-key (kbd "j") (kbd "n"))
   (local-set-key (kbd "k") (kbd "p"))
   (local-set-key (kbd "l") (kbd "TAB"))
