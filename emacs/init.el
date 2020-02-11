@@ -4,7 +4,7 @@
 
 
 ;; 禁用启动画面
-(setq inhibit-startup-screen t)
+;(setq inhibit-startup-screen t)
 
 ;; 启动时全屏
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -62,7 +62,6 @@
 
 (global-unset-key (kbd "C-x C-c"))
 (global-set-key (kbd "C-x C-c") 'kill-this-buffer)
-(global-set-key (kbd "C-x d") 'neotree-toggle)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 ;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
@@ -148,7 +147,6 @@
 		 ((equal prefix '(16)) "%A, %d. %B %Y")))
 	(system-time-locale "zh_CN"))
     (insert (format-time-string format))))
-(global-set-key (kbd "C-c d") 'insert-date)
 
 ;; Emacs Shell Mode
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
@@ -159,7 +157,10 @@
 ;(setq multi-term-program "/bin/zsh")
 ;(global-set-key (kbd "C-c z") (quote multi-term))
 
-(global-set-key (kbd "C-x t") 'multi-term)
+(global-set-key (kbd "C-c t") 'multi-term)
+(global-set-key (kbd "C-c f") 'treemacs)
+(global-set-key (kbd "C-c n") 'neotree-toggle)
+(global-set-key (kbd "C-c d") 'insert-date)
 
 (defun shell-mode-config ()
     (set (make-local-variable 'scroll-margin) 0)
@@ -174,6 +175,10 @@
 (add-hook 'term-mode-hook 'shell-mode-config)
 (add-hook 'shell-mode-hook 'shell-mode-config)
 (add-hook 'eshell-mode-hook 'shell-mode-config)
+
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor"))
+(require 'aweshell)
+(load-file "~/.emacs.d/vendor/save-restore-shells.el")
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -203,6 +208,20 @@
 ;; fix find file bug
 ;(setq projectile-git-submodule-command nil)
 ;(setq projectile-enable-caching t)
+
+ (defun neotree-project-dir ()
+    "Open NeoTree using the git root."
+    (interactive)
+    (let ((project-dir (ffip-project-root))
+          (file-name (buffer-file-name)))
+      (if project-dir
+          (progn
+            (neotree-dir project-dir)
+            (neotree-find file-name))
+        (message "Could not find git project root."))))
+  
+;  (define-key projectile-mode-map (kbd "C-c C-p") 'neotree-project-dir)
+
 
 ;; Projectile
 ;(require 'projectile)
@@ -279,10 +298,12 @@
 (require 'all-the-icons)
 
 (require 'neotree)
+(setq neo-autorefresh t)
 ;;(use-package neotree
 ;;  :after
 ;;  ;; Load the above patches
 ;;  )
+(setq projectile-switch-project-action 'neotree-projectile-action)
 
 ;; json lint
 (require 'flycheck-demjsonlint)
@@ -624,4 +645,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
