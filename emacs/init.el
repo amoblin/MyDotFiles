@@ -128,7 +128,7 @@
 
 ;; 显示行号
 (global-linum-mode t)
-(setq linum-format "%d ")
+(setq linum-format " %d ")
 
 ;; 添加文件更新时间戳
 (add-hook 'before-save-hook 'time-stamp)
@@ -170,7 +170,13 @@
   (local-set-key (kbd "l") (kbd "TAB"))
   )
 
-(add-hook 'treemacs-mode-hook 'tree-conf)
+(add-hook 'treemacs-mode-hook
+          '(lambda ()
+             (tree-conf)
+             (linum-mode -1)
+             )
+          )
+
 (add-hook 'neotree-mode-hook
           '(lambda ()
              (tree-conf)
@@ -209,6 +215,45 @@
 ;; auto update package list
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :config
+  (progn
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package doom-themes
+    :init ;(load-theme 'doom-one t)
+    :config
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
+
+    ;; Corrects (and improves) org-mode's native fontification.
+    ;(doom-themes-org-config)
+
+    ;; Enable custom treemacs theme (all-the-icons must be installed!)
+    (doom-themes-treemacs-config)
+    )
 
 ;; projectile
 
@@ -659,6 +704,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("70de9d999b9e3cbc610ee2b01a2b69502880a78e515088eb9122e4793457f6e4" default)))
  '(package-selected-packages
    (quote
-    (treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
