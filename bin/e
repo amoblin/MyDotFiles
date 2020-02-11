@@ -5,7 +5,7 @@
 # Created Time: 2020-02-11 Tue 18:38
 
 if [ -n "$INSIDE_EMACS" ]; then
-    emacsclient -n $@
+    emacsclient $@
 else
     emacsclient -t $@
 fi
