@@ -20,7 +20,67 @@
 
 (global-auto-revert-mode t)
 
+;; 设置备份目录
+;; Put autosave files (ie #foo#) in one place, *not*
+;; scattered all over the file system!
+(defvar autosave-dir
+ (concat "/tmp/emacs_autosaves/" (user-login-name) "/"))
+(make-directory autosave-dir t)
+(defun auto-save-file-name-p (filename)
+  (string-match "^#.*#$" (file-name-nondirectory filename)))
+(defun make-auto-save-file-name ()
+  (concat autosave-dir
+   (if buffer-file-name
+      (concat "#" (file-name-nondirectory buffer-file-name) "#")
+    (expand-file-name
+     (concat "#%" (buffer-name) "#")))))
+;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
+;; list contains regexp=>directory mappings; filenames matching a regexp are
+;; backed up in the corresponding directory. Emacs will mkdir it if necessary.)
+(defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
+(setq backup-directory-alist (list (cons "." backup-dir)))
+
+;; 字体和编码
+;; 设置英文字体
+(if (display-graphic-p)
+    (set-face-attribute 'default nil :font "Menlo 14" :height 140))
+(if (display-graphic-p)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset (font-spec :family "Heiti_SC" :size 14))
+      ))
+
 ;(set-default-font "Source Code Pro 24")
+
+;; UTF-8 settings
+(set-language-environment 'UTF-8)
+(set-locale-environment "UTF-8")
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(modify-coding-system-alist 'process "*" 'utf-8)
+;(setq default-process-coding-system
+;      '(chinese-gbk . chinese-gbk))
+;(setq-default pathname-coding-system 'chinese-gbk)
+
+; 修复eshell中git log中文乱码 https://answer-id.com/52923551
+(setenv "LANG" "en_US.UTF-8")
+
+(set-default-coding-systems 'utf-8)
+(set-file-name-coding-system 'utf-8-unix)
+(set-next-selection-coding-system 'utf-8-unix)
+(setq locale-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(prefer-coding-system 'cp950)
+(prefer-coding-system 'gb2312)
+(prefer-coding-system 'cp936)
+(prefer-coding-system 'gb18030)
+(prefer-coding-system 'utf-16)
+(prefer-coding-system 'utf-8-dos)
+(prefer-coding-system 'utf-8-unix)
+
 
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -136,6 +196,8 @@
 (setq font-lock-maximum-decoration t)
 (add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\.*tmux$" . conf-unix-mode))
+;; zsh
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 ;; 自动恢复
 ;;(desktop-save-mode 1)
@@ -164,6 +226,19 @@
 
 ;; Emacs Shell Mode
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+
+(when (featurep 'cocoa)
+  ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
+(defun copy-shell-environment-variables ()
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+(copy-shell-environment-variables)
+(setenv "VISUAL" "emacsclient")
+(setenv "EDITOR" (getenv "VISUAL"))
+
 
 ;; multi-term.el
 ;(require 'multi-term)
@@ -224,7 +299,6 @@
 (add-hook 'shell-mode-hook 'shell-mode-config)
 (add-hook 'eshell-mode-hook 'shell-mode-config)
 
-;(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor"))
 ;(require 'aweshell)
 ;(load-file "~/.emacs.d/vendor/save-restore-shells.el")
 
@@ -241,6 +315,20 @@
 ;; auto update package list
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+;; 自动安装包
+;(defvar myPackages
+;  '(better-defaults
+;    ein
+;    elpy
+;    flycheck
+;    material-theme
+;    py-autopep8))
+
+;(mapc #'(lambda (package)
+;          (unless (package-installed-p package)
+;            (package-install package)))
+;      myPackages)
 
 (use-package treemacs
   :ensure t
@@ -286,7 +374,6 @@
     )
 
 ;; projectile
-
 (use-package projectile
    :ensure t
    :config
@@ -295,28 +382,25 @@
        (counsel-projectile-mode)
 ;       (require 'helm-projectile)
 ;       (helm-projectile-on)
+;(projectile-global-mode)
        (projectile-mode +1))
 ;; fix find file bug
 ;(setq projectile-git-submodule-command nil)
 ;(setq projectile-enable-caching t)
 
- (defun neotree-project-dir ()
-    "Open NeoTree using the git root."
-    (interactive)
-    (let ((project-dir (ffip-project-root))
-          (file-name (buffer-file-name)))
-      (if project-dir
-          (progn
-            (neotree-dir project-dir)
-            (neotree-find file-name))
-        (message "Could not find git project root."))))
-  
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+        (file-name (buffer-file-name)))
+    (if project-dir
+        (progn
+          (neotree-dir project-dir)
+          (neotree-find file-name))
+      (message "Could not find git project root."))))
+
 ;  (define-key projectile-mode-map (kbd "C-c C-p") 'neotree-project-dir)
 
-
-;; Projectile
-;(require 'projectile)
-;(projectile-global-mode)
 
 (use-package yasnippet
   :ensure t
@@ -379,29 +463,26 @@
              ))
 
 ;; python dev
-(require 'elpy)
 (use-package elpy
   :ensure t
   :init
   (elpy-enable))
 
-;;
 (require 'all-the-icons)
 
-(require 'neotree)
-(setq neo-autorefresh t)
-;;(use-package neotree
-;;  :after
-;;  ;; Load the above patches
-;;  )
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-autorefresh t)
+;  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-theme 'icons)
+  )
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
 ;; json lint
 (require 'flycheck-demjsonlint)
 
 (setq inhibit-compacting-font-caches t)
-;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-(setq neo-theme 'icons)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -429,16 +510,15 @@
 ;(setq-default fci-rule-column 80)
 ;(setq fci-handle-truncate-lines nil)
 
-;; zsh
-(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
-
 
 (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
    (lambda () (rainbow-mode t)))
 (my-global-rainbow-mode t)
 
 ;; Org-Mode
-;(require 'ox-gfm)
+(use-package ox-gfm
+  :ensure t
+  )
 ;(setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 ;(define-key global-map "\C-ca" 'org-agenda)
@@ -515,7 +595,9 @@
 ;(require 'ox-reveal)
 
 ;; Swift Mode
-;(require 'swift-mode)
+(use-package swift-mode
+  :ensure t
+  )
 
 ;; Markdown Mode
 (add-to-list 'load-path "~/.emacs.d/dev-repo/markdown-mode")
@@ -576,11 +658,6 @@
 
 ;(add-hook 'ruby-mode-hook #'lsp)
 
-;(when (featurep 'cocoa)
-;  ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
-;  (require 'exec-path-from-shell)
-;  (exec-path-from-shell-initialize))
-
 ;(require 'company-lsp)
 ;(push 'company-lsp company-backends)
 
@@ -593,13 +670,6 @@
 ;(lsp-define-stdio-client 'ruby-mode "ruby" 'stdio
 ;                         #'projectile-project-root
 ;                         '("solargraph socket"))
-
-(defun copy-shell-environment-variables ()
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
-(copy-shell-environment-variables)
-(setenv "VISUAL" "emacsclient")
-(setenv "EDITOR" (getenv "VISUAL"))
 
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (setq rspec-use-rvm t)
@@ -614,64 +684,6 @@
 ;(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
 ;(autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
 
-;; 设置备份目录
-;; Put autosave files (ie #foo#) in one place, *not*
-;; scattered all over the file system!
-(defvar autosave-dir
- (concat "/tmp/emacs_autosaves/" (user-login-name) "/"))
-(make-directory autosave-dir t)
-(defun auto-save-file-name-p (filename)
-  (string-match "^#.*#$" (file-name-nondirectory filename)))
-(defun make-auto-save-file-name ()
-  (concat autosave-dir
-   (if buffer-file-name
-      (concat "#" (file-name-nondirectory buffer-file-name) "#")
-    (expand-file-name
-     (concat "#%" (buffer-name) "#")))))
-;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
-;; list contains regexp=>directory mappings; filenames matching a regexp are
-;; backed up in the corresponding directory. Emacs will mkdir it if necessary.)
-(defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
-(setq backup-directory-alist (list (cons "." backup-dir)))
-
-;; 字体和编码
-;; 设置英文字体
-(if (display-graphic-p)
-(set-face-attribute 'default nil :font "Menlo 14" :height 140))
-(if (display-graphic-p)
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font (frame-parameter nil 'font)
-       charset (font-spec :family "Heiti_SC" :size 14))))
-
-;; UTF-8 settings
-(set-language-environment 'UTF-8)
-(set-locale-environment "UTF-8")
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(modify-coding-system-alist 'process "*" 'utf-8)
-;(setq default-process-coding-system
-;      '(chinese-gbk . chinese-gbk))
-;(setq-default pathname-coding-system 'chinese-gbk)
-
-; 修复eshell中git log中文乱码 https://answer-id.com/52923551
-(setenv "LANG" "en_US.UTF-8")
-
-(set-default-coding-systems 'utf-8)
-(set-file-name-coding-system 'utf-8-unix)
-(set-next-selection-coding-system 'utf-8-unix)
-(setq locale-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(prefer-coding-system 'cp950)
-(prefer-coding-system 'gb2312)
-(prefer-coding-system 'cp936)
-(prefer-coding-system 'gb18030)
-(prefer-coding-system 'utf-16)
-(prefer-coding-system 'utf-8-dos)
-(prefer-coding-system 'utf-8-unix)
-
 
 ;; evil
 ;(add-to-list 'load-path "~/.emacs.d/evil")
@@ -681,19 +693,6 @@
 ;(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
 ;(custom-set-variables
 
-
-;(defvar myPackages
-;  '(better-defaults
-;    ein
-;    elpy
-;    flycheck
-;    material-theme
-;    py-autopep8))
-
-;(mapc #'(lambda (package)
-;    (unless (package-installed-p package)
-;      (package-install package)))
-;      myPackages)
 
 ;(elpy-enable)
 ;(elpy-use-ipython)
