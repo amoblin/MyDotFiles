@@ -15,3 +15,7 @@ stop:
 restart:
 	make stop
 	make start
+
+%:
+	rmtrash ~/.emacs.d
+	ln -sf `pwd`/$(*).emacs.d ~/.emacs.d

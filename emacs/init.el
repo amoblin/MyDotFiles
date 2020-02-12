@@ -20,7 +20,7 @@
 
 (global-auto-revert-mode t)
 
-(set-default-font "Source Code Pro 24")
+;(set-default-font "Source Code Pro 24")
 
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -115,7 +115,6 @@
   )
 
 (add-hook 'after-make-frame-functions 'my-set-background-color)
-
 (my-set-background-color)
 
 ;(set-cursor-color "black")
@@ -214,7 +213,7 @@
 (defun shell-mode-config ()
     (set (make-local-variable 'scroll-margin) 0)
     (linum-mode -1)
-    (setq mode-line-format nil)
+;    (setq mode-line-format nil)
     (hl-line-mode nil)
     (face-remap-add-relative
      'hl-line '((:background "#000000") hl-line))
@@ -226,8 +225,8 @@
 (add-hook 'eshell-mode-hook 'shell-mode-config)
 
 ;(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor"))
-(require 'aweshell)
-(load-file "~/.emacs.d/vendor/save-restore-shells.el")
+;(require 'aweshell)
+;(load-file "~/.emacs.d/vendor/save-restore-shells.el")
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -268,6 +267,9 @@
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;(load-theme 'zenburn t)
 
 (use-package doom-themes
     :init ;(load-theme 'doom-one t)
@@ -731,9 +733,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("70de9d999b9e3cbc610ee2b01a2b69502880a78e515088eb9122e4793457f6e4" default)))
  '(package-selected-packages
    (quote
     (treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
