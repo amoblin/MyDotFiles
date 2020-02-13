@@ -2,7 +2,6 @@
 ; 启动报错：Emacs-x86_64-10_14[76147:86409916] Failed to initialize color list unarchiver: Error Domain=NSCocoaErrorDomain Code=4864 "*** -[NSKeyedUnarchiver _initForReadingFromData:error:throwLegacyExceptions:]: non-keyed archive cannot be decoded by NSKeyedUnarchiver" UserInfo={NSDebugDescription=*** -[NSKeyedUnarchiver _initForReadingFromData:error:throwLegacyExceptions:]: non-keyed archive cannot be decoded by NSKeyedUnarchiver}
 ; 删除 ~/Library/Colors/Emacs.clr 即可
 
-
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)
 
@@ -16,6 +15,30 @@
 (scroll-bar-mode -1)
 ;; 禁用menubar
 (setq menu-bar-mode nil)
+
+
+;; iTerm2中配置Command + p等效于C-c p，从而实现Command + p模拟s-p
+
+;; xxd: https://stackoverflow.com/questions/36321230/finding-the-hex-code-sequence-for-a-key-combination
+
+;; https://www.csee.umbc.edu/portal/help/theory/ascii.txt
+
+;; KeyCode: https://apple.stackexchange.com/questions/89981/remapping-keys-in-iterm2
+
+;; keymapping:  0x3 0x70
+
+; 这个没什么效果
+;(setq mac-command-modifier 'super)
+
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+;; 设置elpa源
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
 
 
 (global-auto-revert-mode t)
@@ -231,8 +254,11 @@
 
 (when (featurep 'cocoa)
   ;; Initialize environment from user's shell to make eshell know every PATH by other shell.
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell
+    :ensure t
+    :init (exec-path-from-shell-initialize)
+    )
+  )
 
 (defun copy-shell-environment-variables ()
   (when (memq window-system '(mac ns))
@@ -304,15 +330,6 @@
 ;(require 'aweshell)
 ;(load-file "~/.emacs.d/vendor/save-restore-shells.el")
 
-(require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-
-;; 设置elpa源
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-(package-initialize)
 
 ;; auto update package list
 (when (not package-archive-contents)
@@ -377,15 +394,16 @@
 
 ;; projectile
 (use-package projectile
-   :ensure t
-   :config
-       (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-       (counsel-projectile-mode)
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (counsel-projectile-mode)
 ;       (require 'helm-projectile)
 ;       (helm-projectile-on)
 ;(projectile-global-mode)
-       (projectile-mode +1))
+  (projectile-mode +1)
+  )
 ;; fix find file bug
 ;(setq projectile-git-submodule-command nil)
 ;(setq projectile-enable-caching t)
@@ -448,7 +466,8 @@
   (setq elfeed-feeds
         '("http://nullprogram.com/feed/"
           "https://linuxtoy.org/feeds/all.atom.xml"
-          "https://emacs-china.org/posts.rss"
+;          "https://emacs-china.org/posts.rss"
+          "https://emacs-china.org/latest.rss"
           "http://planet.emacsen.org/atom.xml"))
   )
 
@@ -529,9 +548,9 @@
 (my-global-rainbow-mode t)
 
 ;; Org-Mode
-(use-package ox-gfm
-  :ensure t
-  )
+;(use-package ox-gfm
+;  :ensure t
+;  )
 ;(setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 ;(define-key global-map "\C-ca" 'org-agenda)
