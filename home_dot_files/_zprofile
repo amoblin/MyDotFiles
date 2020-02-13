@@ -28,3 +28,7 @@ source ~/.aliasrc
 #export EDITOR="emacs"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ ! -n "$INSIDE_EMACS" ]; then
+   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
