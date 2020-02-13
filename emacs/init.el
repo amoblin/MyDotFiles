@@ -29,6 +29,7 @@
 
 ; 这个没什么效果
 ;(setq mac-command-modifier 'super)
+ 
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -470,6 +471,18 @@
           "https://emacs-china.org/latest.rss"
           "http://planet.emacsen.org/atom.xml"))
   )
+
+(defun my/browse-url ()
+  (interactive)
+  (browse-url-at-point)
+;(browse-url-at-region)  
+)
+
+(setq browse-url-browser-function 'eww-browse-url)
+(global-set-key (kbd "s-.") 'my/browse-url)
+(global-set-key (kbd "s->") 'my/browse-url)
+(global-set-key (kbd "C-c q .") 'my/browse-url)
+(global-set-key (kbd "C-c q >") 'my/browse-url)
 
 ;; CSV config
 ;(when (fboundp 'csv-mode)
