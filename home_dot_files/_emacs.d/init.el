@@ -161,8 +161,8 @@
 
 (global-unset-key (kbd "C-x C-c"))
 (global-set-key (kbd "C-x C-c") 'kill-this-buffer)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-;(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
 (setq default-frame-alist
     (append
