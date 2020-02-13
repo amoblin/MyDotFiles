@@ -464,25 +464,33 @@
   :ensure t
   :config
   (global-set-key (kbd "C-x w") 'elfeed)
-  (setq elfeed-feeds
-        '("http://nullprogram.com/feed/"
-          "https://linuxtoy.org/feeds/all.atom.xml"
-;          "https://emacs-china.org/posts.rss"
-          "https://emacs-china.org/latest.rss"
-          "http://planet.emacsen.org/atom.xml"))
   )
 
 (defun my/browse-url ()
   (interactive)
-  (browse-url-at-point)
-;(browse-url-at-region)  
-)
+  (if mark-active
+      (browse-url (buffer-substring (region-beginning) (region-end)))
+    (browse-url-at-point)
+    )
+  )
 
 (setq browse-url-browser-function 'eww-browse-url)
 (global-set-key (kbd "s-.") 'my/browse-url)
-(global-set-key (kbd "s->") 'my/browse-url)
 (global-set-key (kbd "C-c q .") 'my/browse-url)
-(global-set-key (kbd "C-c q >") 'my/browse-url)
+
+
+(use-package elfeed-org
+  :ensure t
+  :init (elfeed-org)
+  :config
+  (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
+  )
+
+
+(use-package elfeed-goodies
+  :ensure t
+  :init (elfeed-goodies/setup)
+  )
 
 ;; CSV config
 ;(when (fboundp 'csv-mode)
@@ -780,4 +788,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
