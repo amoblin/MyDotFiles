@@ -195,6 +195,8 @@
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 (add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("\\.*config$" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("\\.*gitcustom$" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\.*tmux$" . conf-unix-mode))
 ;; zsh
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
