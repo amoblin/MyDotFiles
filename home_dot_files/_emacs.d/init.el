@@ -129,6 +129,12 @@
 ;(setq projectile-git-submodule-command nil)
 ;(setq projectile-enable-caching t)
 
+(use-package magit
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x g") 'magit-status)
+  )
+
 
 (use-package makefile-executor
   :config
