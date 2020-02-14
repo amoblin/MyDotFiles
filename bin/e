@@ -4,8 +4,8 @@
 # Author: amoblin <amoblin@gmail.com>
 # Created Time: 2020-02-11 Tue 18:38
 
-vim $@
-exit
+#vim $@
+#exit
 
 if [ -n "$INSIDE_EMACS" ]; then
     emacsclient $@
