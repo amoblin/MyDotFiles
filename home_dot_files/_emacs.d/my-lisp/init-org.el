@@ -67,5 +67,14 @@
  'org-babel-load-languages
  '((dot . t)))
 
+;; Markdown Mode
+(add-to-list 'load-path "~/.emacs.d/dev-repo/markdown-mode")
+;;(add-to-list 'load-path "~/.emacs.d/modes")
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.apib\\'" . markdown-mode))
 
 (provide 'init-org)
