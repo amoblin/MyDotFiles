@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# author: amoblin <amoblin@gmail.com>
+# file name: mcat.py
+# description: TODO
+# create date: 2014-09-29 04:41:39
+# This file is created from $MARBOO_HOME/media/starts/default.py
+# 本文件由 $MARBOO_HOME/media/starts/default.py 复制而来
+
+import os
+import sys
+MARBOO_HOME = os.path.expanduser("~/Marboo")
+MARBOO_WEB_ROOT = os.path.expanduser("~/Library/Application Support/Marboo/www")
+
+#MARBOO_URL_ROOT = "http://localhost:"
+
+def get_dest_path(source_path):
+    dest_path = source_path.replace(MARBOO_HOME, MARBOO_WEB_ROOT)
+    dest_path = "%s.html" % dest_path
+    return dest_path
+
+if __name__ == "__main__":
+    print sys.argv
+    if len(sys.argv) > 1:
+        dest_path = get_dest_path(os.path.abspath(sys.argv[1]))
+        print dest_path
+        os.system("w3m \"%s\"" % dest_path)
+

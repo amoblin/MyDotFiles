@@ -1,0 +1,27 @@
+#!/bin/sh
+# file name: xo.sh
+# description: TODO
+# create date: 2016-06-08 17:49:45
+# author: amoblin
+# This file is created by Marboo<http://marboo.io> template file $MARBOO_HOME/.media/starts/default.sh
+# 本文件由 Marboo<http://marboo.io> 模板文件 $MARBOO_HOME/.media/starts/default.sh　创建
+
+#name=`basename "$1"`
+#name_without_extension=`echo ${name%.*}`
+
+workspace=`find "$1" -name "*.xcworkspace"|grep -v "project.xcworkspace\|Carthage"|head -1`
+LEN=$(echo ${#workspace})
+#echo ${LEN}
+if [ $LEN -gt 0 ]; then
+    echo will open ${workspace}
+    open ${workspace}
+    exit
+fi
+
+xcodeproj=`find "$1" -name "*.xcodeproj"|grep -v "Pods.xcodeproj\|Carthage"|head -1`
+LEN=$(echo ${#xcodeproj})
+#echo ${LEN}
+if [ $LEN -gt 0 ]; then
+    echo will open ${xcodeproj}
+    open ${xcodeproj}
+fi

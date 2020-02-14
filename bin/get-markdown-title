@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+/****************************************************************************
+* -*- coding:utf-8 -*-
+* author: amoblin <amoblin@gmail.com>
+* filename: get-markdown-title.js
+* description: TODO
+* create date: 2015-08-07 13:54:06
+* This file is created by Marboo<http://marboo.io> template file $MARBOO_HOME/.media/starts/default.js
+* 本文件由 Marboo<http://marboo.io> 模板文件 $MARBOO_HOME/.media/starts/default.js 创建
+****************************************************************************/
+
+var getTitle = require("get-title-markdown");
+var fs = require("fs");
+var path = require("path");
+var util = require("util");
+
+var currentPath = process.cwd();
+var scriptPath = __dirname; // process.execPath;
+
+//var fileName = process.argv[2];
+var root = currentPath;
+
+var generateItemByPath = function(relativePath) {
+    var fullPath = path.join(root, relativePath);
+    var content = fs.readFileSync(fullPath, "utf-8");
+    var title = getTitle(content);
+    var item = util.format("* [%s](%s)", title, relativePath);
+    console.log(item);
+}
+
+fs.readdirSync(currentPath).forEach(function(fileName) {
+    if (path.extname(fileName) == ".md") {
+        var filePath = fileName;
+        generateItemByPath(filePath);
+    }
+});
+

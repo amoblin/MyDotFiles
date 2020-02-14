@@ -1,0 +1,11 @@
+#!/bin/sh
+# author: amoblin <amoblin@gmail.com>
+# file name: pc.sh
+# description: path copy to system clipboard
+# create date: 2014-09-24 15:35:33
+# This file is created from $MARBOO_HOME/media/starts/default.sh
+# 本文件由 $MARBOO_HOME/media/starts/default.sh　复制而来
+
+greadlink -f "$1"|tr -d "\n" | pbcopy
+#name=`basename "$1"`
+#tmp_file=/tmp/$name
