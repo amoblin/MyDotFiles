@@ -12,8 +12,7 @@
 
 (require 'init-general)
 (require 'init-shell)
-
-
+(require 'init-file-manager)
 
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -76,28 +75,6 @@
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c k") 'windmove-up)
 
-(defun tree-conf ()
-  (local-set-key (kbd "s") 'am-open-terminal)
-  (local-set-key (kbd "x") 'am-open-terminal)
-  (local-set-key (kbd "j") (kbd "n"))
-  (local-set-key (kbd "k") (kbd "p"))
-  (local-set-key (kbd "l") (kbd "TAB"))
-  )
-
-(add-hook 'treemacs-mode-hook
-          '(lambda ()
-             (tree-conf)
-             (linum-mode -1)
-             )
-          )
-
-(add-hook 'neotree-mode-hook
-          '(lambda ()
-             (tree-conf)
-             (local-set-key (kbd "u") (kbd "U"))
-             )
-          )
-
 ;; auto update package list
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -115,33 +92,6 @@
 ;          (unless (package-installed-p package)
 ;            (package-install package)))
 ;      myPackages)
-
-(use-package treemacs
-  :ensure t
-  :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :config
-  (progn
-    (setq treemacs-width 25)
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode t)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple))))
-  :bind
-  (:map global-map
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;(load-theme 'zenburn t)
@@ -288,15 +238,6 @@
   (elpy-enable))
 
 (require 'all-the-icons)
-
-(use-package neotree
-  :ensure t
-  :config
-  (setq neo-autorefresh t)
-;  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq neo-theme 'icons)
-  )
-(setq projectile-switch-project-action 'neotree-projectile-action)
 
 ;; json lint
 (require 'flycheck-demjsonlint)
