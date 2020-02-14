@@ -1,0 +1,15 @@
+#+TITLE: elfeed
+#+AUTHOR: amoblin
+#+EMAIL: <amoblin@gmail.com>
+#+DATE: <2020-02-13 Thu 17:45>
+#+TODO: TODO(t) DOING(i!) | DONE(d)
+#+OPTIONS: ^:{}
+
+* Blogs                                                              :elfeed:
+** entry-title: \(linux\|linus\|ubuntu\|kde\|gnome\)                  :linux:
+** [[http://orgmode.org][Org Mode Links supported as well]]
+** Software Development                                                 :dev:
+*** Emacs                                                    :emacs:mustread:
+**** https://emacs-china.org/latest.rss
+**** https://linuxtoy.org/feeds/all.atom.xml
+**** entry-title: \(emacs\|org-mode\)
