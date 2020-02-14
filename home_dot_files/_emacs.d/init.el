@@ -15,6 +15,7 @@
 (require 'init-file-manager)
 (require 'init-rss)
 (require 'init-org)
+(require 'init-yas)
 
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -127,52 +128,6 @@
 ;(setq projectile-git-submodule-command nil)
 ;(setq projectile-enable-caching t)
 
-(defun neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (ffip-project-root))
-        (file-name (buffer-file-name)))
-    (if project-dir
-        (progn
-          (neotree-dir project-dir)
-          (neotree-find file-name))
-      (message "Could not find git project root."))))
-
-;  (define-key projectile-mode-map (kbd "C-c C-p") 'neotree-project-dir)
-
-
-(use-package yasnippet
-  :ensure t
-  :init
-  (yas-global-mode 1)
-  :config
-  (add-to-list 'yas-snippet-dirs (locate-user-emacs-file "snippets")))
-
-(defun my/autoinsert-yas-expand()
-  "Replace text in yasnippet template."
-  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
-
-(use-package autoinsert
-  :init
-  ;; Don't want to be prompted before insertion:
-  (setq auto-insert-query nil)
-
-  (setq auto-insert-directory (locate-user-emacs-file "templates"))
-  (add-hook 'find-file-hook 'auto-insert)
-  (auto-insert-mode 1)
-
-  :config
-  (define-auto-insert "\\.el$" ["elisp.el" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.c$" ["c.c" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.org$" ["org-mode.org" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.py$" ["python.py" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.js$" ["node.js" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.rb$" ["ruby.rb" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.md$" ["markdown.rb" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.sh$" ["shell.sh" my/autoinsert-yas-expand])
-  (define-auto-insert "Makefile$" ["Makefile" my/autoinsert-yas-expand])
-  (define-auto-insert "Rakefile$" ["Rakefile" my/autoinsert-yas-expand])
-  (define-auto-insert "\\.html?$" ["html.html" my/autoinsert-yas-expand]))
 
 (use-package makefile-executor
   :config
