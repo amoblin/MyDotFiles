@@ -18,7 +18,7 @@
     ld = log --decorate --graph
 [color]
     ui = auto
-    diff = always
+    diff = auto
 [core]
     editor = e
 #    editor = vim
