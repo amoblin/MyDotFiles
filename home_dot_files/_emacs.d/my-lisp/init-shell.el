@@ -23,12 +23,25 @@
 ;(setq multi-term-program "/bin/zsh")
 ;(global-set-key (kbd "C-c z") (quote multi-term))
 
+(global-set-key (kbd "C-c x") 'am-open-terminal)
+(global-set-key (kbd "C-c e")
+                '(lambda (command)
+                   (interactive "sShell command: \n")
+                   (if (display-graphic-p)
+                       (shell-command command)
+                     (shell-command (format "tmux split-window \"%s;readq\"" command))
+                       )))
+
 (defun am-open-terminal ()
   "Open a `shell' in a new window."
   (interactive)
-  (let ((buf (multi-term)))
-    (switch-to-buffer (buf))
-    ))
+  (if (display-graphic-p)
+      (let ((buf (multi-term)))
+        (switch-to-buffer (buf))
+        )
+    (shell-command "tmux split-window")
+    )
+  )
 
 (defun shell-mode-config ()
     (set (make-local-variable 'scroll-margin) 0)

@@ -80,7 +80,6 @@
     (insert (format-time-string format))))
 
 (global-set-key (kbd "C-c SPC") 'window-split-toggle)
-(global-set-key (kbd "C-c x") 'am-open-terminal)
 (global-set-key (kbd "C-c f") 'treemacs)
 (global-set-key (kbd "C-c n") 'neotree-toggle)
 (global-set-key (kbd "C-c d") 'insert-date)

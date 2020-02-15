@@ -1,0 +1,20 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+# File Name: readq
+# Author: amoblin <amoblin@gmail.com>
+# Created Time: 2020-02-15 Sat 10:43
+
+echo "Press q to continue..."
+
+while [ true ]; do
+    read -s -n1 -r key
+
+    if [ "$key" = '' ]; then
+        # Space or Return pressed, do something
+        exit
+    elif [ "$key" = 'q' ]; then
+        exit
+    else
+        echo -n $key
+    fi
+done
