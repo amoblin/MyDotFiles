@@ -20,7 +20,7 @@
     ui = auto
     diff = auto
 [core]
-    editor = e
+    editor = et
 #    editor = vim
     ignore = pyc
     excludesfile = ~/.gitignore

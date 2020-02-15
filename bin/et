@@ -1,0 +1,7 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+# File Name: et
+# Author: amoblin <amoblin@gmail.com>
+# Created Time: 2020-02-15 Sat 09:07
+
+emacsclient -t $@

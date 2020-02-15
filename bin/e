@@ -10,5 +10,9 @@
 if [ -n "$INSIDE_EMACS" ]; then
     emacsclient $@
 else
-    emacsclient -t $@
+    if [ $# -eq 0 ]; then
+        emacsclient -t
+    else
+        emacsclient -t -e "(find-file \"$@\")"
+    fi
 fi

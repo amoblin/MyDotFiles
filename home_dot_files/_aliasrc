@@ -16,7 +16,7 @@ alias en="emacsclient -s ws2 -t"
 alias es="emacsclient -e '(save-buffers-kill-emacs)'"
 
 ec() {
-  nohup emacsclient -c $* > /dev/null 2>&1 &
+  nohup emacsclient -c $@ > /dev/null 2>&1 &
 }
 
 alias ts='tig status'
