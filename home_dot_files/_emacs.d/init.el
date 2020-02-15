@@ -29,8 +29,18 @@
 ;(global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 
+(defun my/switch-env ()
+  (interactive)
+  (if (display-graphic-p)
+      (switch-to-next-buffer)
+    (save-buffers-kill-terminal)
+    )
+  )
+
 (global-unset-key (kbd "C-x C-c"))
-(global-set-key (kbd "C-x C-c") 'kill-this-buffer)
+(global-set-key (kbd "C-x C-c") 'my/switch-env)
+;(setq server-kill-new-buffers nil)
+
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
