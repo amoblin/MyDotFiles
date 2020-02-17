@@ -65,6 +65,9 @@
 (add-to-list 'auto-mode-alist '("\\.*tmux$" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
+(require 'whitespace)
+(setq-default show-trailing-whitespace t)
+
 ;; 自动恢复
 ;;(desktop-save-mode 1)
 
