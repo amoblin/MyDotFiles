@@ -60,7 +60,7 @@
 ;                         #'projectile-project-root
 ;                         '("solargraph socket"))
 
-(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+;(add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (setq rspec-use-rvm t)
 (defadvice rspec-compile (around rspec-compile-around)
   "Use BASH shell for running the specs because of ZSH issues."

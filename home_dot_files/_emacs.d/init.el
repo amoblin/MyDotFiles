@@ -10,6 +10,16 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
+;; auto update package list
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+
 (require 'init-general)
 (require 'init-shell)
 (require 'init-file-manager)
@@ -88,10 +98,6 @@
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c k") 'windmove-up)
 
-;; auto update package list
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
 ;; 自动安装包
 ;(defvar myPackages
 ;  '(better-defaults
@@ -110,6 +116,7 @@
 ;(load-theme 'zenburn t)
 
 (use-package doom-themes
+    :ensure t
     :init ;(load-theme 'doom-one t)
     :config
     ;; Enable flashing mode-line on errors
@@ -123,6 +130,10 @@
     )
 
 ;; projectile
+(use-package counsel-projectile
+:ensure t
+)
+
 (use-package projectile
   :ensure t
   :config
@@ -146,6 +157,7 @@
 
 
 (use-package makefile-executor
+  :ensure t
   :config
   (add-hook 'makefile-mode-hook 'makefile-executor-mode))
 
@@ -172,10 +184,15 @@
              (csv-header-line)
              ))
 
-(require 'all-the-icons)
+(use-package all-the-icons
+  :ensure t
+  :init (require 'all-the-icons)
+)
 
 ;; json lint
-(require 'flycheck-demjsonlint)
+(use-package flycheck-demjsonlint
+  :ensure t
+)
 
 (setq inhibit-compacting-font-caches t)
 
@@ -205,6 +222,10 @@
 ;(setq fci-handle-truncate-lines nil)
 
 
+(use-package rainbow-mode
+  :ensure t
+  :config (rainbow-mode t)
+)
 (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
    (lambda () (rainbow-mode t)))
 (my-global-rainbow-mode t)
@@ -229,7 +250,10 @@
 ;(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
 
-(require 'eglot)
+(use-package eglot
+  :ensure t
+)
+
 ;(add-hook 'ruby-mode-hook 'eglot-ensure)
 ;(add-to-list 'eglot-server-programs '(ruby-mode . ("solargraph" "socket")))
 

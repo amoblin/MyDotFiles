@@ -6,6 +6,10 @@
 ;(use-package ox-gfm
 ;  :ensure t
 ;  )
+
+(use-package ob-mermaid
+  :ensure t
+  )
 ;(setq org-hide-leading-stars t)
 (setq org-log-done 'time)
 ;(define-key global-map "\C-ca" 'org-agenda)
@@ -23,8 +27,6 @@
 
 
 (setq org-confirm-babel-evaluate nil)
-
-(add-to-list 'load-path "~/.emacs.d/elpa/ob-mermaid-20180522.1659")
 
 (setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
 ;(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
