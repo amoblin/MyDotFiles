@@ -49,7 +49,7 @@
 
 (global-unset-key (kbd "C-x C-c"))
 (global-set-key (kbd "C-x C-c") 'my/switch-env)
-;(setq server-kill-new-buffers nil)
+;;(setq server-kill-new-buffers nil)
 
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
@@ -79,7 +79,7 @@
 (add-hook 'before-save-hook 'time-stamp)
 
 ;; 保存文件时删除空白符
-;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (defun insert-date (prefix)
   "Insert the current date. With prefix-argument, use ISO format. With
@@ -135,40 +135,26 @@
    ("C-;" . pyim-delete-word-from-personal-buffer)
    ))
 
-;; 自动安装包
-;(defvar myPackages
-;  '(better-defaults
-;    ein
-;    elpy
-;    flycheck
-;    material-theme
-;    py-autopep8))
-
-;(mapc #'(lambda (package)
-;          (unless (package-installed-p package)
-;            (package-install package)))
-;      myPackages)
-
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;(load-theme 'zenburn t)
+;;(load-theme 'zenburn t)
 
 (use-package doom-themes
-    :ensure t
-    :init ;(load-theme 'doom-one t)
-    :config
-    ;; Enable flashing mode-line on errors
-    (doom-themes-visual-bell-config)
+  :ensure t
+  :init ;(load-theme 'doom-one t)
+  :config
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
 
-    ;; Corrects (and improves) org-mode's native fontification.
-    ;(doom-themes-org-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  ;;(doom-themes-org-config)
 
-    ;; Enable custom treemacs theme (all-the-icons must be installed!)
-    (doom-themes-treemacs-config)
-    )
+  ;; Enable custom treemacs theme (all-the-icons must be installed!)
+  (doom-themes-treemacs-config)
+  )
 
 ;; projectile
 (use-package counsel-projectile
-:ensure t
+  :ensure t
 )
 
 (use-package projectile
@@ -177,14 +163,14 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (counsel-projectile-mode)
-;       (require 'helm-projectile)
-;       (helm-projectile-on)
-;(projectile-global-mode)
+;;       (require 'helm-projectile)
+;;       (helm-projectile-on)
+;;(projectile-global-mode)
   (projectile-mode +1)
   )
 ;; fix find file bug
-;(setq projectile-git-submodule-command nil)
-;(setq projectile-enable-caching t)
+;;(setq projectile-git-submodule-command nil)
+;;(setq projectile-enable-caching t)
 
 (use-package magit
   :ensure t
@@ -200,25 +186,23 @@
   (smartparens-global-mode)
   )
 
-
-
 (use-package makefile-executor
   :ensure t
   :config
   (add-hook 'makefile-mode-hook 'makefile-executor-mode))
 
 ;; CSV config
-;(when (fboundp 'csv-mode)
+;;(when (fboundp 'csv-mode)
 
-;  (defun my-config ()
-;    "For use in `csv-mode-hook'."
-;    (local-set-key (kbd "tab") 'csv-forward-field)
-;    (local-set-key (kbd "S-TAB") 'csv-backward-field)
-;    ;; more stuff here
-;    )
+;;  (defun my-config ()
+;;    "For use in `csv-mode-hook'."
+;;    (local-set-key (kbd "tab") 'csv-forward-field)
+;;    (local-set-key (kbd "S-TAB") 'csv-backward-field)
+;;    ;; more stuff here
+;;    )
 
-;  (add-hook 'csv-mode-hook 'my-config)
-;  )
+;;  (add-hook 'csv-mode-hook 'my-config)
+;;  )
 
 (add-hook 'csv-mode-hook ;; guessing
           '(lambda ()
@@ -252,20 +236,20 @@
 
 
 ;; tabbar mode
-;(require 'tabbar)
-;(tabbar-mode t)
+;;(require 'tabbar)
+;;(tabbar-mode t)
 ;; 禁用分组
-;(setq tabbar-buffer-groups-function nil)
-;(global-set-key [(meta n)] 'tabbar-forward)
-;(global-set-key [(meta p)] 'tabbar-backward)
+;;(setq tabbar-buffer-groups-function nil)
+;;(global-set-key [(meta n)] 'tabbar-forward)
+;;(global-set-key [(meta p)] 'tabbar-backward)
 
 ;; 80 column indicator
-;(require 'fill-column-indicator)
-;(setq fci-rule-width 1)
-;(setq fci-rule-color "gray")
-;(add-hook 'after-change-major-mode-hook 'fci-mode)
-;(setq-default fci-rule-column 80)
-;(setq fci-handle-truncate-lines nil)
+;;(require 'fill-column-indicator)
+;;(setq fci-rule-width 1)
+;;(setq fci-rule-color "gray")
+;;(add-hook 'after-change-major-mode-hook 'fci-mode)
+;;(setq-default fci-rule-column 80)
+;;(setq fci-handle-truncate-lines nil)
 
 
 (use-package rainbow-mode
@@ -277,47 +261,38 @@
 (my-global-rainbow-mode t)
 
 ;; Common Lisp
-; slime setup
-;(setq inferior-lisp-program "sbcl")
-;(require 'slime)
-;(slime-setup)
+;; slime setup
+;;(setq inferior-lisp-program "sbcl")
+;;(require 'slime)
+;;(slime-setup)
 
 ;; Presentation/ Slide
 ;; retrieve at https://github.com/yjwen/org-reveal/
-;(require 'ox-reveal)
+;;(require 'ox-reveal)
 
 ;; Adaptive Filling
 (setq adaptive-fill-regexp "[ \t]+\\|[ \t]*\\([0-9]+\\.\\|\\*+\\)[ \t]*")
 
 ;; 语法高亮
-;(add-auto-mode 'ruby-mode "Podfile\\'" "\\.podspec\\'")
-;(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode)) ;; support Podfiles
-;(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
-;(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+;;(add-auto-mode 'ruby-mode "Podfile\\'" "\\.podspec\\'")
+;;(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode)) ;; support Podfiles
+;;(add-to-list 'auto-mode-alist '("\\.podspec$" . ruby-mode)) ;; support Podspecs
+;;(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
 
 (use-package eglot
   :ensure t
 )
 
-;(add-hook 'ruby-mode-hook 'eglot-ensure)
-;(add-to-list 'eglot-server-programs '(ruby-mode . ("solargraph" "socket")))
+;;(add-hook 'ruby-mode-hook 'eglot-ensure)
+;;(add-to-list 'eglot-server-programs '(ruby-mode . ("solargraph" "socket")))
 
-;(require 'company-lsp)
-;(push 'company-lsp company-backends)
+;;(require 'company-lsp)
+;;(push 'company-lsp company-backends)
 
 ;; iimage mode
-;(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
-;(autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
-
-
-;; evil
-;(add-to-list 'load-path "~/.emacs.d/evil")
-;(require 'evil)
-;(evil-mode 1)
-;(setq evil-default-state 'emacs)
-;(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
-;(custom-set-variables
+;;(autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
+;;(autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
 
 
 (custom-set-faces
