@@ -1,0 +1,19 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+# File Name: cclock
+# Description: count clock
+# Reference: http://www.kbase101.com/question/48101.html
+# Author: amoblin <amoblin@gmail.com>
+# Created Time: 2020-02-17 Mon 11:07
+
+date1=`date +%s.%N`
+while true; do
+    date=`date +%s.%N`
+    delta=0`bc <<< "$date - $date1"`
+    echo -ne "$(date -u --date @$delta +%H:%M:%S.%1N)\r";
+done
+
+# the following solution can run in zsh
+#date1=`date +%s.%N`; while true; do
+#   echo -ne "$(date -u --date @$((`date +\%s.\%N` - $date1)) +%H:%M:%S.%1N)\r";
+#done

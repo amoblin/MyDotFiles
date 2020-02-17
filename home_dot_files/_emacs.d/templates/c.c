@@ -1,6 +1,10 @@
-//file name : `(buffer-name)`
-//created at: `(format-time-string "%c")`
-//author:  `user-full-name`
+/*
+ * File name : `(buffer-name)`
+ * Description: 
+ * Reference: 
+ * Created at: `(format-time-string "%c")`
+ * Author:  `user-full-name`
+ */
 
 #include <stdio.h>
 
