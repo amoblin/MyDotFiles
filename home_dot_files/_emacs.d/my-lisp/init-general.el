@@ -1,6 +1,6 @@
 ;;
 ; 启动报错：Emacs-x86_64-10_14[76147:86409916] Failed to initialize color list unarchiver: Error Domain=NSCocoaErrorDomain Code=4864 "*** -[NSKeyedUnarchiver _initForReadingFromData:error:throwLegacyExceptions:]: non-keyed archive cannot be decoded by NSKeyedUnarchiver" UserInfo={NSDebugDescription=*** -[NSKeyedUnarchiver _initForReadingFromData:error:throwLegacyExceptions:]: non-keyed archive cannot be decoded by NSKeyedUnarchiver}
-; 删除 ~/Library/Colors/Emacs.clr 即可
+; 删除 ~/Library/Colors/Emacs.clr 即可。参考：https://stackoverflow.com/questions/52521587/emacs-error-when-i-call-it-in-the-terminal
 
 ;; 禁用启动画面
 (setq inhibit-startup-screen t)

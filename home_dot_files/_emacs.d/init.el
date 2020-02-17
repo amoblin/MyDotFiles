@@ -101,6 +101,40 @@
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c k") 'windmove-up)
 
+;; pyim
+(global-set-key (kbd "C-\\") 'toggle-input-method)
+(use-package pyim
+  :ensure nil
+  :config
+  (use-package pyim-basedict
+    :ensure nil
+    :config (pyim-basedict-enable))
+
+  (setq default-input-method "pyim")
+
+  (pyim-isearch-mode 1)
+  (setq pyim-page-tooltip 'popup)
+  (setq pyim-page-length 10)
+
+  (add-hook 'emacs-startup-hook
+            '(lambda () (pyim-restart-1 t)))
+
+  (setq-default pyim-english-input-switch-functions
+                '(pyim-probe-dynamic-english
+                  pyim-probe-auto-english
+                  pyim-probe-isearch-mode
+                  pyim-probe-program-mode
+                  pyim-probe-org-structure-template))
+
+  (setq-default pyim-punctuation-half-width-functions
+                '(pyim-probe-punctuation-line-beginning
+                  pyim-probe-punctuation-after-punctuation))
+
+  :bind
+  (("M-j" . pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
+   ("C-;" . pyim-delete-word-from-personal-buffer)
+   ))
+
 ;; 自动安装包
 ;(defvar myPackages
 ;  '(better-defaults
@@ -299,4 +333,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ws-butler smartparens rainbow-delimiters ranger elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (pyim-wbdict pyim ws-butler smartparens rainbow-delimiters ranger elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
