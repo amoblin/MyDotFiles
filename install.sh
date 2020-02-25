@@ -37,6 +37,10 @@ done
 item=`pwd`/emacsclient/EmacsClient.app
 d=/Applications/EmacsClient.app
 [ -s "$d" ] && echo "ignore " $item || (echo $item -\> $d; ln -sf $item $d)
+
+item=`pwd`/home_dot_files/_plantumlrc
+d=/usr/local/etc/plantumlrc
+[ -s "$d" ] && echo "ignore " $item || (echo $item -\> $d; ln -sf $item $d)
 exit
 
 #mkdir -p ~/.vim/backup
