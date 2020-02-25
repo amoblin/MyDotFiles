@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ ! -d /tmp/dcat ]; then mkdir -f /tmp/dcat; fi
+git init /tmp/dcat > /dev/null
+
+f=`date +%s`
+
+cp $1.bak /tmp/dcat/$f
+git --work-tree="/tmp/dcat" add $f
+cp -f $1 /tmp/dcat/$f
+git --work-tree="/tmp/dcat" diff --color-words=. -- $f
