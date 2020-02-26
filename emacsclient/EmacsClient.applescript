@@ -1,1 +1,1 @@
-do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n"
+do shell script "/usr/local/bin/emacsclient -c -n"
