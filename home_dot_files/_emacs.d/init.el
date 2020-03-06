@@ -27,6 +27,7 @@
 (require 'init-org)
 (require 'init-yas)
 (require 'init-programming)
+(require 'init-op)
 
 ;; 设置第三方插件安装目录
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -51,8 +52,8 @@
 (global-set-key (kbd "C-x C-c") 'my/switch-env)
 ;;(setq server-kill-new-buffers nil)
 
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -96,16 +97,12 @@
 (global-set-key (kbd "C-c f") 'treemacs)
 (global-set-key (kbd "C-c n") 'neotree-toggle)
 (global-set-key (kbd "C-c d") 'insert-date)
-(global-set-key (kbd "C-c h") 'windmove-left)
-(global-set-key (kbd "C-c l") 'windmove-right)
-(global-set-key (kbd "C-c j") 'windmove-down)
-(global-set-key (kbd "C-c k") 'windmove-up)
 
 ;; pyim
-(global-set-key (kbd "C-\\") 'toggle-input-method)
 (use-package pyim
   :ensure nil
   :config
+  (global-set-key (kbd "C-\\") 'toggle-input-method)
   (use-package pyim-basedict
     :ensure nil
     :config (pyim-basedict-enable))
@@ -130,6 +127,12 @@
                 '(pyim-probe-punctuation-line-beginning
                   pyim-probe-punctuation-after-punctuation))
 
+  (define-key pyim-mode-map "." 'pyim-page-next-page)
+  (define-key pyim-mode-map "," 'pyim-page-previous-page)
+  (define-key pyim-mode-map ";"
+    (lambda ()
+      (interactive)
+      (pyim-page-select-word-by-number 2)))
   :bind
   (("M-j" . pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-;" . pyim-delete-word-from-personal-buffer)
@@ -172,11 +175,42 @@
 ;;(setq projectile-git-submodule-command nil)
 ;;(setq projectile-enable-caching t)
 
+(use-package ace-window
+  :ensure t
+  :custom-face
+;;  (aw-leading-char-face ((t (:inherit font-lock-keyword-face :bold t :height 3.0))))
+;;  (aw-mode-line-face ((t (:inherit mode-line-emphasis :bold t))))
+  :config
+  (global-set-key (kbd "C-x o") 'ace-window)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  )
+
+(show-paren-mode 1)
+
+(use-package avy
+  :ensure t
+  :config
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+  )
+
 (use-package magit
   :ensure t
   :config
   (global-set-key (kbd "C-x g") 'magit-status)
   (setq magit-diff-refine-hunk (quote all))
+  (setq magit-display-buffer-function
+        (lambda (buffer)
+          (display-buffer
+           buffer (if (and (derived-mode-p 'magit-mode)
+                           (memq (with-current-buffer buffer major-mode)
+                                 '(magit-process-mode
+                                   magit-revision-mode
+                                   magit-diff-mode
+                                   magit-stash-mode
+                                   magit-status-mode)))
+                      nil
+                    '(display-buffer-same-window)))))
   )
 
 (use-package smartparens
@@ -184,6 +218,12 @@
   :init (require 'smartparens-config)
   :config
   (smartparens-global-mode)
+  )
+
+(use-package ws-butler
+  :ensure t
+  :config
+  (ws-butler-global-mode)
   )
 
 (use-package makefile-executor
@@ -300,7 +340,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(aw-leading-char-face ((t (:inherit font-lock-keyword-face :bold t :height 3.0))))
+ '(aw-mode-line-face ((t (:inherit mode-line-emphasis :bold t)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -308,4 +349,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (pyim-wbdict pyim ws-butler smartparens rainbow-delimiters ranger elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (nginx-mode htmlize gtags origami ace-link undo-tree org-preview-html xclip pyim-wbdict pyim ws-butler smartparens rainbow-delimiters ranger elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))

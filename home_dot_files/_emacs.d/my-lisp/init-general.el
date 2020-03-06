@@ -14,7 +14,8 @@
 ;; 禁用滚动条
 (scroll-bar-mode -1)
 ;; 禁用menubar
-(setq menu-bar-mode nil)
+(unless (display-graphic-p)
+   (menu-bar-mode -1))
 
 (global-auto-revert-mode t)
 
@@ -26,7 +27,7 @@
        (height . 35))
        default-frame-alist))
 
-(setq-default cursor-type 'bar) ; 设置光标为竖线
+(setq-default cursor-type 'bar) ; 设置光标为竖线，terminal中无法生效
 ;(setq-default cursor-type 'box) ; 设置光标为方块
 
 
@@ -149,7 +150,8 @@
 (setq-default indent-tabs-mode nil)
 
 ;; 自动折行
-(toggle-truncate-lines 1)
+;(toggle-truncate-lines 1)
+(global-visual-line-mode t)
 
 ;; 记住光标位置
 (require 'saveplace)

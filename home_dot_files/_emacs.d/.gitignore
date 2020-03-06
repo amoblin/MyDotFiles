@@ -3,3 +3,7 @@ elpa/
 eshell/
 places
 url
+pyim/
+themes/
+tutorial/
+*.ttf

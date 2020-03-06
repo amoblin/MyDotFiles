@@ -27,10 +27,26 @@
 
 
 (setq org-confirm-babel-evaluate nil)
+(setq org-display-inline-images t)
+(setq org-redisplay-inline-images t)
+(setq org-startup-with-inline-images "inlineimages")
 
-(setq org-plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
-;(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
-(setq ob-mermaid-cli-path (expand-file-name "~/MyDocuments/bin/mmdc.sh"))
+(define-key org-mode-map (kbd "C-c C-c")
+  (lambda () (interactive) (org-ctrl-c-ctrl-c)
+                           (org-display-inline-images)))
+
+(setq org-image-actual-width '(400))
+
+;; Enable plantuml-mode for PlantUML files
+(setq plantuml-jar-path (expand-file-name "~/bin/plantuml.jar"))
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\plantumlrc\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
+(setq org-plantuml-jar-path (expand-file-name "~/bin/plantuml.jar"))
+(setq ob-mermaid-cli-path (expand-file-name "~/bin/mmdc.sh"))
 ;; active Org-babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -42,15 +58,6 @@
    (mermaid . t)
    (C . t)
 ))
-
-
-;; Enable plantuml-mode for PlantUML files
-(setq plantuml-jar-path (expand-file-name "~/MyDocuments/bin/plantuml.jar"))
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\plantumlrc\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
-(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
 ;;开启dot画图
 (defvar org-list-allow-alphabetical t)
