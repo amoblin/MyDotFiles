@@ -4,8 +4,13 @@
 [ -d "$HOME/.oh-my-zsh" ] || (curl -L http://install.ohmyz.sh | sh)
 
 # zsh config
-#ln amoblin.zsh ~/.oh-my-zsh/custom
-#ln amoblin.zsh-theme ~/.oh-my-zsh/theme
+item=`pwd`/home_dot_files/_oh-my-zsh/custom/amoblin.zsh
+dist=~/.oh-my-zsh/custom/amoblin.zsh
+[ -s $dist ] && echo igonre "$item" || (echo $item -\> $dist; ln -sf $item $dist)
+
+item=`pwd`/home_dot_files/_oh-my-zsh/custom/themes/amoblin.zsh-theme
+dist=~/.oh-my-zsh/custom/themes/amoblin.zsh-theme
+[ -s $dist ] && echo igonre "$item" || (echo $item -\> $dist; ln -sf $item $dist)
 
 item=`pwd`/bin
 dist=~/bin
