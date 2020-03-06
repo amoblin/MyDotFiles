@@ -30,6 +30,7 @@ source ~/.aliasrc
 
 ZSH_THEME="amoblin"
 ZSH_THEME="robbyrussell"
+ZSH_THEME="tiny"
 
 plugins=(
     osx

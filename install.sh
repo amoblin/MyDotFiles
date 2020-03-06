@@ -12,6 +12,10 @@ item=`pwd`/home_dot_files/_oh-my-zsh/custom/themes/amoblin.zsh-theme
 dist=~/.oh-my-zsh/custom/themes/amoblin.zsh-theme
 [ -s $dist ] && echo igonre "$item" || (echo $item -\> $dist; ln -sf $item $dist)
 
+item=`pwd`/home_dot_files/_oh-my-zsh/custom/themes/tiny.zsh-theme
+dist=~/.oh-my-zsh/custom/themes/tiny.zsh-theme
+[ -s $dist ] && echo igonre "$item" || (echo $item -\> $dist; ln -sf $item $dist)
+
 item=`pwd`/bin
 dist=~/bin
 [ -s $dist ] && echo igonre "bin" || (echo $item -\> $dist; ln -sf $item $dist)

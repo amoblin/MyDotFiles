@@ -1,4 +1,6 @@
+#!/bin/sh
 # from essembeh
+
 # Theme with full path names and hostname
 # Handy if you work on different servers all the time;
 #
@@ -54,4 +56,3 @@ ZSH_THEME_GIT_PROMPT_MODIFIED="*"
 ZSH_THEME_GIT_PROMPT_RENAMED="~"
 ZSH_THEME_GIT_PROMPT_DELETED="!"
 ZSH_THEME_GIT_PROMPT_UNMERGED="?"
-
