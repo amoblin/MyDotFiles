@@ -10,4 +10,3 @@
 #tmp_file=/tmp/$name
 
 ifconfig en0 | grep "inet " | awk '{print $2}' | tr -d "\n"
-ifconfig en5 | grep "inet " | awk '{print $2}' | tr -d "\n"
