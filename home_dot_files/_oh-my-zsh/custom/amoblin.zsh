@@ -5,7 +5,7 @@
 #
 
 # zplug
-source $ZPLUG_HOME/init.zsh
+#source $ZPLUG_HOME/init.zsh
 zplug "plugins/git",   from:oh-my-zsh
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"

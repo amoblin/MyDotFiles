@@ -34,5 +34,6 @@
   (define-auto-insert "Makefile$" ["Makefile" my/autoinsert-yas-expand])
   (define-auto-insert "Rakefile$" ["Rakefile" my/autoinsert-yas-expand])
   (define-auto-insert "\\.html?$" ["html.html" my/autoinsert-yas-expand]))
+  (define-auto-insert "\\.pu?$" ["plantuml.pu" my/autoinsert-yas-expand]))
 
 (provide 'init-yas)

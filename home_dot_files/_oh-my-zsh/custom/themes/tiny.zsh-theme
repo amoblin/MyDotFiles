@@ -73,7 +73,7 @@ function precmd() {
     #say_limit=1
 
     DATE=$( date +"%F %H:%M:%S.%3N" )
-    [ $elapsed -gt $say_limit ] && echo "say 执行完成，耗时${elapsed}毫秒 &" > /tmp/zsh-precmd-amoblin && . /tmp/zsh-precmd-amoblin
+    # [ $elapsed -gt $say_limit ] && echo "say 执行完成，耗时${elapsed}毫秒 &" > /tmp/zsh-precmd-amoblin && . /tmp/zsh-precmd-amoblin
     [ $elapsed -gt $echo_limit ] && echo "${GREEN}Finished, cost ${elapsed}ms: ${_DATE} - ${DATE}${NOCOLOR}"
 
     unset timer

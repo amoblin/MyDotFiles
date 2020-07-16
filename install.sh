@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # install oh-my-zsh
 [ -d "$HOME/.oh-my-zsh" ] || (curl -L http://install.ohmyz.sh | sh)

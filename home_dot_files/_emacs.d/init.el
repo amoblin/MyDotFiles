@@ -3,11 +3,17 @@
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+			 ("melpa" . "http://elpa.emacs-china.org/melpa/")
+			 ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
+			 ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
+			 ))
 ;; 设置elpa源
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
+(setq _package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")
                          ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ))
 (package-initialize)
 
 ;; auto update package list
@@ -260,9 +266,9 @@
 )
 
 ;; json lint
-(use-package flycheck-demjsonlint
-  :ensure t
-)
+;(use-package flycheck-demjsonlint
+;  :ensure t
+;)
 
 (setq inhibit-compacting-font-caches t)
 
@@ -349,4 +355,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (nginx-mode htmlize gtags origami ace-link undo-tree org-preview-html xclip pyim-wbdict pyim ws-butler smartparens rainbow-delimiters ranger elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))
+    (markdown-mode typescript-mode nginx-mode htmlize gtags origami ace-link undo-tree org-preview-html xclip pyim-wbdict pyim ws-butler smartparens rainbow-delimiters ranger elfeed-goodies elfeed-org elfeed treemacs-icons-dired doom-themes treemacs desktop+ makefile-executor groovy-mode helm-projectile eglot yaml-mode wsd-mode swift-mode rspec-mode realgud-pry realgud-byebug plantuml-mode neotree multi-term multi-run magit-popup magit lsp-rust lsp-ruby json-mode jekyll-modes inf-ruby hierarchy helm go-mode ghub feature-mode exec-path-from-shell eterm-256color enh-ruby-mode ecukes easy-jekyll cucumber-goto-step ctags csv-mode counsel-projectile company-ycmd company-lsp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-github cnfonts auto-complete all-the-icons-ivy all-the-icons-dired ag))))

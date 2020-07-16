@@ -1,10 +1,12 @@
-#alias .='source'
-alias ls='ls --color'
-alias diff='colordiff -u'
+alias .='source'
+#alias ls='ls --color'
+alias ll='ls -lh'
+alias la='ls -A'
+#alias diff='colordiff -u'
+alias vi='vim'
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rmtrash'
-alias be='bundle exec'
+#alias rm='rmtrash'
 #alias rm='rm -i'
 
 alias sss="ruby -run -ehttpd . -p8000"
@@ -19,8 +21,8 @@ ec() {
   nohup emacsclient -c $@ > /dev/null 2>&1 &
 }
 
+alias gfl='git flow'
 alias ts='tig status'
-alias pi='pod install'
 
 alias o='open'
 alias q='exit'
@@ -40,5 +42,5 @@ alias sudo='sudo '
 alias screen='export SCREENPWD=$(pwd);screen'
 
 alias f=flutter
-
-alias loadnvm=". $NVM_DIR/nvm.sh"
+alias c=google-chrome
+alias ta='tmux attach'
