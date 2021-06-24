@@ -5,6 +5,8 @@
 !$c66 = "#666666"
 !$c5 = "#FFFFFF"
 !$c6 = "#FFF2CC"
+!$c7 = "#3c8725"
+!$c8 = "#6021F5"
 
 skinparam {
         shadowing false
@@ -71,7 +73,7 @@ skinparam collections {
 skinparam interface {
        BackgroundColor #EEEEEE
        BorderThickness 1
-       BorderColor $c2
+       BorderColor $c7
 }
 
 skinparam entity {

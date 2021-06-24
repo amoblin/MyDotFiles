@@ -6,7 +6,8 @@ alias la='ls -A'
 alias vi='vim'
 alias cp='cp -i'
 alias mv='mv -i'
-#alias rm='rmtrash'
+alias rm='rmtrash'
+alias m='make'
 #alias rm='rm -i'
 
 alias sss="ruby -run -ehttpd . -p8000"

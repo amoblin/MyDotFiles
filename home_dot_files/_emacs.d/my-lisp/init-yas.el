@@ -28,6 +28,7 @@
   (define-auto-insert "\\.org$" ["org-mode.org" my/autoinsert-yas-expand])
   (define-auto-insert "\\.py$" ["python.py" my/autoinsert-yas-expand])
   (define-auto-insert "\\.js$" ["node.js" my/autoinsert-yas-expand])
+  (define-auto-insert "\\.ts$" ["node.ts" my/autoinsert-yas-expand])
   (define-auto-insert "\\.rb$" ["ruby.rb" my/autoinsert-yas-expand])
   (define-auto-insert "\\.md$" ["markdown.rb" my/autoinsert-yas-expand])
   (define-auto-insert "\\.sh$" ["shell.sh" my/autoinsert-yas-expand])

@@ -170,6 +170,12 @@
   scroll-conservatively 10000
   scroll-preserve-screen-position 1)
 
+(require 'highlight-parentheses)
+(define-globalized-minor-mode global-highlight-parentheses-mode
+  highlight-parentheses-mode
+  (lambda ()
+    (highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)
 
 (defun window-split-toggle ()
   "Toggle between horizontal and vertical split with two windows."
